@@ -12,7 +12,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			// Load the FXML file for the game board
-			Parent root = FXMLLoader.load(getClass().getResource("/Gameboard.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("Gameboard.fxml"));
 			
 			// Set the scene onto the stage
 			primaryStage.setScene(new Scene(root, 900, 900));
