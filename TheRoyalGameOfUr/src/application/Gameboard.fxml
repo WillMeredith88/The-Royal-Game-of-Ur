@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="803.0" fitWidth="367.0" layoutX="290.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@application/images/Gameboard.png" />
+                  <Image url="https://github.com/UTSA-CS-3443/The-Royal-Game-of-Ur/blob/master/TheRoyalGameOfUr/src/application/images/Gameboard.png" />
                </image>
             </ImageView>
             <GridPane layoutX="305.0" layoutY="65.0" prefHeight="768.0" prefWidth="290.0" visible="false">
