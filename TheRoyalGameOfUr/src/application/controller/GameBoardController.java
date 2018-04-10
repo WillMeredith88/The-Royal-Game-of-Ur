@@ -1,9 +1,13 @@
 package application.controller;
 
+import application.Main;
 import application.model.Dice;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -122,6 +126,19 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	    private Label turnNotification;
 	    
 	    private int turnCounter = 0;
+		
+		@FXML
+		protected void GoMenu() {
+			try {
+				Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/TitleScreen.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 576));
+				Main.stage.show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			System.out.println("Main Page"); 
+	    	
+		}
 	
 	@Override
 	public void handle(ActionEvent event) {
