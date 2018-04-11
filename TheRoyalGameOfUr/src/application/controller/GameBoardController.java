@@ -1,7 +1,8 @@
 package application.controller;
 
+
 import application.Main;
-import application.model.Dice;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class GameBoardController implements EventHandler<ActionEvent> {
 	
@@ -21,12 +23,16 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	@FXML
 	private ImageView token_player_0, token_player_1, token_player_2, token_player_3, token_player_4, token_player_5, token_player_6, token_player_7, 
 	token_player_8, token_player_9, token_player_10, token_player_11, token_player_12, token_player_13, token_player_14;
+	
+	@FXML
+	private ImageView token_ai_0, token_ai_1, token_ai_2, token_ai_3, token_ai_4, token_ai_5, token_ai_6, token_ai_7, 
+	token_ai_8, token_ai_9, token_ai_10, token_ai_11, token_ai_12, token_ai_13, token_ai_14;
     
 	@FXML
 	private Button diceRollButton;
 	    
 	@FXML
-	private Label diceRollLabel, beginLabel, completeLabel, turnNotification;
+	private Label diceRollLabel, diceRollLabelAI, beginLabel, beginLabelAI, completeLabel, completeLabelAI, turnNotification, turnNotificationAI, turnTracker;
 		
 	@FXML
 	protected void GoMenu() {
@@ -43,16 +49,24 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	
 	private int turnCounter = 0;
 	
+	@FXML
+	public void initialize(){
+		token_ai_5.setVisible(true);
+		beginLabelAI.setText("6");
+	}
+	
 	@Override
 	public void handle(ActionEvent event) {
 		Button selected = (Button) event.getSource();
 		// player turn 1
 		if(turnCounter == 0){
+			turnTracker.setText("Player");
+			diceRollButton.setDisable(false);
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("3");
 				
 				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
+				token_player_0.setVisible(true);			
 			}
 		}
 		
@@ -66,7 +80,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				zeroButton.setOpacity(.5);
 				token_player_0.setVisible(true);
 			}
-		}	
+		}
+		
 		
 		//player turn 3
 		if(turnCounter == 2){
@@ -139,6 +154,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(false);
 				token_player_3.setVisible(true);
 				beginLabel.setText("6");
+				processAITurn();
 				turnCounter++;
 			}	
 		}
@@ -151,6 +167,9 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(false);
 				token_player_3.setVisible(false);
 				token_player_5.setVisible(true);
+				token_ai_5.setVisible(false);
+				beginLabelAI.setText("6");
+				processAITurn();
 				turnCounter++;
 			}
 		}
@@ -175,6 +194,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				token_player_1.setVisible(true);
 				beginLabel.setText("5");
 				turnNotification.setText("");
+				processAITurn();
 				turnCounter++;
 			}	
 		}
@@ -188,6 +208,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(false);
 				token_player_8.setVisible(false);
 				token_player_12.setVisible(true);
+				processAITurn();
 				turnCounter++;
 			}
 			
@@ -200,6 +221,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(false);
 				token_player_12.setVisible(false);
 				token_player_13.setVisible(true);
+				processAITurn();
 				turnCounter++;
 			}		
 		}
@@ -210,7 +232,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				oneButton.setOpacity(0);
 				zeroButton.setOpacity(0);
 				token_player_0.setVisible(false);
-				token_player_1.setVisible(false);
 				token_player_13.setVisible(false);
 				completeLabel.setText("1");
 				turnCounter++;
@@ -218,4 +239,78 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		}
 	}
 
+	public void processAITurn(){
+		PauseTransition pause = new PauseTransition(Duration.millis(1000));
+		PauseTransition pieceDelay = new PauseTransition(Duration.millis(1000));
+		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
+		PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
+		// AI turn 1
+			if(turnCounter == 0){
+				turnTracker.setText("Computer");
+				diceRollButton.setDisable(true);
+				diceRollLabelAI.setText("2");
+				beginLabelAI.setText("5");
+				pause.setOnFinished(event -> token_ai_2.setVisible(true));
+				pause.play();
+				pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+				pauseTurnLabel.play();
+				enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+				enableRollButton.play();
+			}	
+			
+			// AI turn 2
+			if(turnCounter == 1){
+				turnTracker.setText("Computer");
+				diceRollButton.setDisable(true);
+				diceRollLabelAI.setText("0");
+				turnNotificationAI.setText("Skip Turn!");
+				pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+				pauseTurnLabel.play();
+				enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+				enableRollButton.play();
+			}
+			
+			// AI turn 3
+			if(turnCounter == 3){
+				turnTracker.setText("Computer");
+				diceRollButton.setDisable(true);
+				diceRollLabelAI.setText("3");
+				turnNotificationAI.setText("");
+				pause.setOnFinished(event -> token_ai_3.setVisible(true));
+				pause.play();
+				pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+				pauseTurnLabel.play();
+				enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+				enableRollButton.play();	
+			}
+			
+			// AI turn 3
+			if(turnCounter == 4){
+				turnTracker.setText("Computer");
+				diceRollButton.setDisable(true);
+				diceRollLabelAI.setText("3");
+				pieceDelay.setOnFinished(event -> token_ai_3.setVisible(false));
+				pieceDelay.play();
+				pause.setOnFinished(event -> token_ai_6.setVisible(true));
+				pause.play();
+				pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+				pauseTurnLabel.play();
+				enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+				enableRollButton.play();
+			}
+			
+			// AI turn 3
+			if(turnCounter == 5){
+				turnTracker.setText("Computer");
+				diceRollButton.setDisable(true);
+				diceRollLabelAI.setText("1");
+				beginLabelAI.setText("4");
+				pause.setOnFinished(event -> token_ai_1.setVisible(true));
+				pause.play();
+				pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+				pauseTurnLabel.play();
+				enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+				enableRollButton.play();
+			}
+	}
 }
