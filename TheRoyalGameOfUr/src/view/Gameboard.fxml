@@ -91,7 +91,7 @@
                   <Image url="@../application/images/player_token.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="token_player_begin" fitHeight="66.0" fitWidth="78.0" layoutX="59.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="token_player_begin" fitHeight="66.0" fitWidth="78.0" layoutX="59.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../application/images/player_token.png" />
                </image>
@@ -135,18 +135,21 @@
                   <Button fx:id="twelveButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#tileHandler" opacity="0.0" prefHeight="144.0" prefWidth="190.0" style="-fx-background-color: #13f431;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
-            <Button fx:id="diceRollButton" layoutX="50.0" layoutY="385.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="85.0" text="Roll" />
-            <Label fx:id="diceRollLabel" layoutX="79.0" layoutY="459.0" prefHeight="56.0" prefWidth="50.0">
+            <Button fx:id="diceRollButton" layoutX="59.0" layoutY="305.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #2556a3;" text="Roll" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Label fx:id="diceRollLabel" layoutX="168.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
                <font>
                   <Font size="42.0" />
                </font>
             </Label>
-            <Label fx:id="turnNotification" layoutX="50.0" layoutY="522.0" prefHeight="48.0" prefWidth="190.0">
+            <Label fx:id="turnNotification" layoutX="59.0" layoutY="359.0" prefHeight="48.0" prefWidth="156.0">
                <font>
                   <Font size="31.0" />
                </font>
             </Label>
-            <Label fx:id="beginLabel" layoutX="135.0" layoutY="68.0" prefHeight="48.0" prefWidth="41.0" text="7" textFill="RED">
+            <Label fx:id="beginLabel" layoutX="135.0" layoutY="158.0" prefHeight="48.0" prefWidth="41.0" text="7" textFill="RED">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -156,7 +159,7 @@
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Label layoutX="29.0" layoutY="23.0" text="Pieces Remaining ">
+            <Label layoutX="29.0" layoutY="113.0" text="Pieces Remaining ">
                <font>
                   <Font size="25.0" />
                </font>
@@ -164,6 +167,152 @@
             <Label layoutX="25.0" layoutY="684.0" text="Pieces Completed">
                <font>
                   <Font size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="795.0" layoutY="838.0" mnemonicParsing="false" onAction="#GoMenu" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #e75050;" text="Main Menu" textFill="#fffbfb" />
+            <Label layoutX="59.0" layoutY="37.0" text="Player">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="670.0" layoutY="37.0" text="Computer">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="663.0" layoutY="113.0" text="Pieces Remaining ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="665.0" layoutY="684.0" text="Pieces Completed">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="token_ai_begin" fitHeight="66.0" fitWidth="78.0" layoutX="698.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_complete" fitHeight="66.0" fitWidth="78.0" layoutX="698.0" layoutY="731.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="beginLabelAI" layoutX="777.0" layoutY="153.0" prefHeight="48.0" prefWidth="41.0" text="7" textFill="#0011ff">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <Label fx:id="completeLabelAI" layoutX="775.0" layoutY="729.0" prefHeight="48.0" prefWidth="41.0" text="0" textFill="#0011ff">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="149.0" layoutY="295.0" prefHeight="62.0" prefWidth="14.0" text=":">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="token_ai_1" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_2" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_3" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_4" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_5" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_6" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_7" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_8" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_9" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_10" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="559.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_11" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_12" fitHeight="66.0" fitWidth="78.0" layoutX="417.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_13" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="753.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_14" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="token_ai_0" fitHeight="66.0" fitWidth="78.0" layoutX="512.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../application/images/ai_token.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="640.0" layoutY="300.0" text="AI Roll:">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label fx:id="diceRollLabelAI" layoutX="793.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+            <Label fx:id="turnNotificationAI" layoutX="653.0" layoutY="359.0" prefHeight="48.0" prefWidth="156.0">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Label>
+            <Label fx:id="turnTracker" layoutX="430.0" layoutY="838.0" prefHeight="58.0" prefWidth="197.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="304.0" layoutY="838.0" text="Turn:">
+               <font>
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
          </children></AnchorPane>
