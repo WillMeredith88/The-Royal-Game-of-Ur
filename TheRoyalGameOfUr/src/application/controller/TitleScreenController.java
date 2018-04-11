@@ -31,7 +31,7 @@ public class TitleScreenController {
 	@FXML
 	protected void GoInstructions() {
 		try {
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Instructions.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Rules1.fxml"));
 			Main.stage.setScene(new Scene(root, 900, 900));
 			Main.stage.show();
 		} catch (Exception e) {
