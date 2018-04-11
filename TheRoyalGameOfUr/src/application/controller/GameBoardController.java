@@ -46,6 +46,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button selected = (Button) event.getSource();
+		// player turn 1
 		if(turnCounter == 0){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("3");
@@ -55,6 +56,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}
 		
+		// player turn 2
 		if(turnCounter == 1){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("2");
@@ -66,6 +68,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}	
 		
+		//player turn 3
 		if(turnCounter == 2){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("3");
@@ -77,6 +80,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}	
 		
+		//player turn 4
 		if(turnCounter == 3){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("1");
@@ -88,6 +92,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}
 		
+		// player turn 5
 		if(turnCounter == 4){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("4");
@@ -100,6 +105,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}
 		
+		//player turn 6
 		if(turnCounter == 5){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("1");
@@ -109,6 +115,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 		}
 		
+		// player turn 7
 		if(turnCounter == 6){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("2");
@@ -124,72 +131,90 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 	
 	public void tileHandler(ActionEvent event){
-		Button tile = (Button) event.getSource();
+		Button selected = (Button) event.getSource();
+		// player turn 1
 		if(turnCounter == 0){
-			zeroButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_3.setVisible(true);
-			beginLabel.setText("6");
-			turnCounter++;
+			if(selected.getId().equals("zeroButton")) {
+				zeroButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_3.setVisible(true);
+				beginLabel.setText("6");
+				turnCounter++;
+			}	
 		}
 		
+		// player turn 2
 		else if(turnCounter == 1){
-			zeroButton.setOpacity(0);
-			threeButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_3.setVisible(false);
-			token_player_5.setVisible(true);
-			turnCounter++;
+			if(selected.getId().equals("threeButton")) {
+				zeroButton.setOpacity(0);
+				threeButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_3.setVisible(false);
+				token_player_5.setVisible(true);
+				turnCounter++;
+			}
 		}
-		
+		// player turn 3
 		else if(turnCounter == 2){
-			zeroButton.setOpacity(0);
-			fiveButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_5.setVisible(false);
-			token_player_8.setVisible(true);
-			turnNotification.setText("Roll Again!");
-			turnCounter++;
+			if(selected.getId().equals("fiveButton")) {
+				zeroButton.setOpacity(0);
+				fiveButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_5.setVisible(false);
+				token_player_8.setVisible(true);
+				turnNotification.setText("Roll Again!");
+				turnCounter++;
+			}	
 		}
-		
+		// player turn 4
 		else if(turnCounter == 3){
-			zeroButton.setOpacity(0);
-			eightButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_1.setVisible(true);
-			beginLabel.setText("5");
-			turnNotification.setText("");
-			turnCounter++;
+			if(selected.getId().equals("zeroButton")) {
+				zeroButton.setOpacity(0);
+				eightButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_1.setVisible(true);
+				beginLabel.setText("5");
+				turnNotification.setText("");
+				turnCounter++;
+			}	
 		}
 		
+		// player turn 5
 		else if(turnCounter == 4){
-			zeroButton.setOpacity(0);
-			eightButton.setOpacity(0);
-			oneButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_8.setVisible(false);
-			token_player_12.setVisible(true);
-			turnCounter++;
+			if(selected.getId().equals("eightButton")) {
+				zeroButton.setOpacity(0);
+				eightButton.setOpacity(0);
+				oneButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_8.setVisible(false);
+				token_player_12.setVisible(true);
+				turnCounter++;
+			}
+			
 		}
-		
+		// player turn 6
 		else if(turnCounter == 5){
-			twelveButton.setOpacity(0);
-			oneButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_12.setVisible(false);
-			token_player_13.setVisible(true);
-			turnCounter++;
+			if(selected.getId().equals("twelveButton")) {
+				twelveButton.setOpacity(0);
+				oneButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_12.setVisible(false);
+				token_player_13.setVisible(true);
+				turnCounter++;
+			}		
 		}
-		
+		// player turn 7
 		else if(turnCounter == 6){
-			thirteenButton.setOpacity(0);
-			oneButton.setOpacity(0);
-			zeroButton.setOpacity(0);
-			token_player_0.setVisible(false);
-			token_player_1.setVisible(false);
-			token_player_13.setVisible(false);
-			completeLabel.setText("1");
-			turnCounter++;
+			if(selected.getId().equals("thirteenButton")) {
+				thirteenButton.setOpacity(0);
+				oneButton.setOpacity(0);
+				zeroButton.setOpacity(0);
+				token_player_0.setVisible(false);
+				token_player_1.setVisible(false);
+				token_player_13.setVisible(false);
+				completeLabel.setText("1");
+				turnCounter++;
+			}		
 		}
 	}
 
