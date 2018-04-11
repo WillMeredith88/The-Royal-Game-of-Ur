@@ -14,136 +14,38 @@ import javafx.scene.image.ImageView;
 
 public class GameBoardController implements EventHandler<ActionEvent> {
 	
-	 @FXML
-	    private Button thirteenButton;
+	@FXML
+	private Button zeroButton, oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton, 
+	eightButton, nineButton, tenButton, elevenButton, twelveButton, thirteenButton, fourteenButton;
 
-	    @FXML
-	    private Button threeButton;
-
-	    @FXML
-	    private Button sevenButton;
-
-	    @FXML
-	    private ImageView token_player_10;
-
-	    @FXML
-	    private Button twoButton;
-
-	    @FXML
-	    private Button eightButton;
-
-	    @FXML
-	    private ImageView token_player_1;
-
-	    @FXML
-	    private ImageView token_player_12;
-
-
-	    @FXML
-	    private ImageView token_player_11;
-
-
-	    @FXML
-	    private ImageView token_player_3;
-
-	    @FXML
-	    private ImageView token_player_14;
-
-
-	    @FXML
-	    private Button zeroButton;
-
-	    @FXML
-	    private Button fourteenButton;
-
-	    @FXML
-	    private ImageView token_player_2;
-
-	    @FXML
-	    private ImageView token_player_13;
-
-	    @FXML
-	    private ImageView token_player_5;
-
-
-	    @FXML
-	    private ImageView token_player_4;
-
-	    @FXML
-	    private ImageView token_player_7;
-
-
-	    @FXML
-	    private Button fourButton;
-
-	    @FXML
-	    private ImageView token_player_6;
+	@FXML
+	private ImageView token_player_0, token_player_1, token_player_2, token_player_3, token_player_4, token_player_5, token_player_6, token_player_7, 
+	token_player_8, token_player_9, token_player_10, token_player_11, token_player_12, token_player_13, token_player_14;
+    
+	@FXML
+	private Button diceRollButton;
 	    
-	    @FXML
-	    private ImageView token_player_0;
-
-
-	    @FXML
-	    private ImageView token_player_9;
-
-	    @FXML
-	    private ImageView token_player_8;
-
-	    @FXML
-	    private Button tenButton;
-
-	    @FXML
-	    private Button twelveButton;
-
-	    @FXML
-	    private Button oneButton;
-
-	    @FXML
-	    private Button elevenButton;
-
-	    @FXML
-	    private Button sixButton;
-
-	    @FXML
-	    private Button nineButton;
-
-	    @FXML
-	    private Button fiveButton;
-	    
-	    @FXML
-	    private Button diceRollButton;
-	    
-	    @FXML
-	    private Label diceRollLabel;
-	    
-	    @FXML
-	    private Label beginLabel;
-	    
-	    @FXML
-	    private Label completeLabel;
-	    
-	    @FXML
-	    private Label turnNotification;
-	    
-	    private int turnCounter = 0;
+	@FXML
+	private Label diceRollLabel, beginLabel, completeLabel, turnNotification;
 		
-		@FXML
-		protected void GoMenu() {
-			try {
-				Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/TitleScreen.fxml"));
-				Main.stage.setScene(new Scene(root, 800, 576));
-				Main.stage.show();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-			System.out.println("Main Page"); 
+	@FXML
+	protected void GoMenu() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/TitleScreen.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 576));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
 	    	
 		}
+	
+	private int turnCounter = 0;
 	
 	@Override
 	public void handle(ActionEvent event) {
 		Button selected = (Button) event.getSource();
-		//System.out.println(selected.toString());
 		if(turnCounter == 0){
 			if(selected.getId().equals("diceRollButton")) {
 				diceRollLabel.setText("3");
@@ -204,9 +106,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				
 				twelveButton.setOpacity(.5);
 				oneButton.setOpacity(.5);
-				
-				//zeroButton.setOpacity(.5);
-				//token_player_0.setVisible(true);
 			}
 		}
 		

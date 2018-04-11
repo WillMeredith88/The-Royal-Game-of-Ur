@@ -21,7 +21,7 @@ public class InstructionsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		System.out.println("Main Page"); 
+		//System.out.println("Main Page"); 
     	
 	}
 
