@@ -1,5 +1,8 @@
 package application.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class GameBoard {
 	
 	
@@ -9,23 +12,100 @@ public class GameBoard {
 	 * and handling them if a move function- Will
 	 */
 	Square[][] squares = new Square[8][3];
+	//Square[] squares = new Square[20];
+	HashMap<String, Square> map = new HashMap();
 	Player player;
 	Player AI;//AI may need its own class 
 	Dice dice[];
+	Square current;
+	
+	
 	
 	public GameBoard(Player player){
 		this.player = player;
+		this.current=squares[0][0];
 		
-		
+		squares[0][0]= new Square(0,0);
+		squares[0][1]= new Square(0,0);
+		squares[0][2]= new Square(0,1);
+		squares[1][0]= new Square(0,2);
+		squares[1][1]= new Square(1,0);
+		squares[1][2]= new Square(1,1);
+		squares[2][0]= new Square(1,2);
+		squares[2][1]= new Square(2,0);
+		squares[2][2]= new Square(2,1);
+		squares[3][0]= new Square(2,2);
+		squares[3][1]= new Square(3,0);
+		squares[3][2]= new Square(3,1);
+		squares[4][0]= new Square(3,2);
+		squares[4][1]= new Square(4,0);
+		squares[4][2]= new Square(4,1);
+		squares[5][0]= new Square(4,2);
+		squares[5][1] = new Square(5,0);
+		squares[5][2] = new Square(5,1);
+		squares[6][0] = new Square(5,2);
+		squares[6][1] = new Square(6,0);
+		squares[6][2] = new Square(6,1);
+		squares[7][0] = new Square(7,0);
+		squares[7][1] = new Square(7,1);
+		squares[7][2] = new Square(7,2);
+		squares[8][0] = new Square(8,0);
+		squares[8][1] = new Square(8,1);
+		squares[8][2] = new Square(8,2);
+		map.put("zeroButton", squares[0][0]);
+		map.put("oneButton", squares[0][1]);
+		map.put("twoButton", squares[0][2]);
+		map.put("threeButton", squares[1][0]);
+		map.put("fourButton", squares[1][1]);
+		map.put("fiveButton", squares[1][2]);
+		map.put("sixButton", squares[2][0]);
+		map.put("sevenButton", squares[2][1]);
+		map.put("eightButton", squares[2][2]);
+		map.put("nineButton", squares[3][0]);
+		map.put("tenButton", squares[3][1]);
+		map.put("eleventButton", squares[3][2]);
+		map.put("tweleveButton", squares[4][0]);
+		map.put("thirteenButton", squares[4][1]);
 	}
 	
 
 	/**
-	 * this method should set the board up and
-	 * account for the extra squares as well as
-	 * the ones that contain a rosette.
+	 * 
+	 * @param current (Square)
+	 * @return
 	 */
-	public void setBoard(){
+	public ArrayList<Square> getPossibleMove(Square current, int roll){
+		int row=current.getRow();
+		int col=current.getCol();
+		//int roll=Dice.rollDice();
+		int rollCounter=roll;
+		
+		ArrayList<Square> list = new ArrayList<Square>();
+		
+		for(int i=0; i<roll; i++){
+				if(squares[row+rollCounter][col+i] != null 
+						&& squares[row+rollCounter][col+i].getIsHiddenPlayer()){
+							list.add(squares[row+rollCounter][col+i]);
+			}
+		
+		}
+		
+		if(squares[row][col+roll] != null 
+				&& squares[row+rollCounter][col+roll].getIsHiddenPlayer()){
+			
+			list.add(squares[row][col+roll]);
+		}
+		
+		
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+		public void setBoard(){
 		
 		for(int row=0; row<8; row++){
 			for(int col=0; col < 3; col++){
@@ -43,11 +123,9 @@ public class GameBoard {
 			}
 		
 		
-		public Square canMove(Square square){
-			//todo: write method which determines if a player can move to a specific square
 		
-		return square;
-	}
 	
-	
+		
+		
+		
 }

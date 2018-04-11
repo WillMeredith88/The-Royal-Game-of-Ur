@@ -5,11 +5,15 @@ public class Square {
 	private boolean isHiddenPlayer;
 	private boolean isHiddenAI;
 	private boolean isRosette;
+	private int row;
+	private int col;
 	
-	public Square(){
+	public Square(int row, int col){
 		this.isHiddenPlayer=true;
 		this.isHiddenAI=true;
 		this.isRosette=false;
+		this.row=row;
+		this.col=col;
 	}
 	
 	public void setIsRosette(){
@@ -36,6 +40,22 @@ public class Square {
 	
 	public boolean getIsRosette(){
 		return this.isRosette;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
 	}
 	
 	
