@@ -21,7 +21,7 @@
                   <Font size="33.0" />
                </font>
             </Button>
-            <Label layoutX="133.0" layoutY="224.0" prefHeight="111.0" prefWidth="635.0" text="The Royal Game Of Ur" textFill="WHITE">
+            <Label layoutX="133.0" layoutY="224.0" prefHeight="111.0" prefWidth="701.0" text="The Royal Game Of Ur" textFill="WHITE">
                <font>
                   <Font size="64.0" />
                </font>

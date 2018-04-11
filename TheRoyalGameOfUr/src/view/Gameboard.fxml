@@ -175,7 +175,7 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Label layoutX="670.0" layoutY="37.0" text="Computer">
+            <Label layoutX="653.0" layoutY="40.0" text="Computer">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -305,7 +305,7 @@
                   <Font size="31.0" />
                </font>
             </Label>
-            <Label fx:id="turnTracker" layoutX="430.0" layoutY="838.0" prefHeight="58.0" prefWidth="197.0">
+            <Label fx:id="turnTracker" layoutX="430.0" layoutY="838.0" prefHeight="58.0" prefWidth="271.0">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
