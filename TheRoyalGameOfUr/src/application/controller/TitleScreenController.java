@@ -40,4 +40,17 @@ public class TitleScreenController {
 		//System.out.println("Main Page"); 
     	
 	}
+	
+	@FXML
+	protected void GoCredits() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Credits.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
+    	
+	}
 }
