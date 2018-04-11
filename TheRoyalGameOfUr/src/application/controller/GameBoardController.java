@@ -32,7 +32,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	protected void GoMenu() {
 		try {
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/TitleScreen.fxml"));
-			Main.stage.setScene(new Scene(root, 800, 576));
+			Main.stage.setScene(new Scene(root, 900, 900));
 			Main.stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

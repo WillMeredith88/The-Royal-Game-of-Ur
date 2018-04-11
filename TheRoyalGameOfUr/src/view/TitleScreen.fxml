@@ -9,28 +9,24 @@
 
 <AnchorPane maxHeight="576" maxWidth="800" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.TitleScreenController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="800.0" style="-fx-background-image: url('images/BackGround.png')">
+      <AnchorPane prefHeight="900.0" prefWidth="900.0" style="-fx-background-image: url('images/titleBackground.png');">
          <children>
-            <Label alignment="BOTTOM_RIGHT" prefHeight="184.0" prefWidth="720.0" text="The Royal Game Of Ur" textFill="#9e9898">
+            <Button fx:id="Instructions" layoutX="330.0" layoutY="590.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoInstructions" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #bf0909;" text="Intructions" textFill="WHITE">
                <font>
-                  <Font name="Chalkboard Bold" size="66.0" />
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Button fx:id="NewGame" layoutX="324.0" layoutY="464.0" mnemonicParsing="false" onAction="#GoNewGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="New Game" textFill="WHITE">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Label layoutX="156.0" layoutY="210.0" text="The Royal Game Of Ur" textFill="WHITE">
+               <font>
+                  <Font size="60.0" />
                </font>
             </Label>
-            <AnchorPane prefHeight="241.0" prefWidth="800.0">
-               <children>
-                  <Button fx:id="NewGame" layoutX="285.0" layoutY="57.0" mnemonicParsing="false" onAction="#GoNewGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="New Game" textFill="WHITE">
-                     <font>
-                        <Font size="33.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="Instructions" layoutX="298.0" layoutY="164.0" mnemonicParsing="false" onAction="#GoInstructions" nodeOrientation="LEFT_TO_RIGHT" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: darkgreen;" text="Intructions" textFill="WHITE">
-                     <font>
-                        <Font size="33.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

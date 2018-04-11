@@ -18,7 +18,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/TitleScreen.fxml"));
 			
 			// Set the scene onto the stage
-			primaryStage.setScene(new Scene(root, 800, 576));
+			primaryStage.setScene(new Scene(root, 900, 900));
 			
 			// Display the board to the user
 			primaryStage.show();
