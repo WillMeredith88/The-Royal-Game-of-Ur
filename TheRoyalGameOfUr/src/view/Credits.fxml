@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.InstructionsController">
+   <children>
+      <AnchorPane prefHeight="900.0" prefWidth="900.0" style="-fx-background-color: black;">
+         <children>
+            <Label alignment="CENTER" layoutX="96.0" layoutY="34.0" prefHeight="117.0" prefWidth="708.0" text="CS3443-001 Team Voldemort" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="52.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="127.0" prefHeight="117.0" prefWidth="576.0" text="-The Royal Game of Ur-" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="52.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="283.0" prefHeight="117.0" prefWidth="576.0" text="Jared Andrzejewski" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="41.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="151.0" layoutY="362.0" prefHeight="117.0" prefWidth="576.0" text="Will Meredith" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="450.0" prefHeight="117.0" prefWidth="576.0" text="David Thomas" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="546.0" prefHeight="117.0" prefWidth="576.0" text="Will Nester" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="635.0" prefHeight="117.0" prefWidth="576.0" text="Kenneth Webber" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="GoMenu" layoutX="14.0" layoutY="851.0" mnemonicParsing="false" onAction="#GoMenu" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #2e3033;" text="Main Menu" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

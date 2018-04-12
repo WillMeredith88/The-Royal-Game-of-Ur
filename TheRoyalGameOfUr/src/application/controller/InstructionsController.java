@@ -24,5 +24,57 @@ public class InstructionsController {
 		//System.out.println("Main Page"); 
     	
 	}
+	
+	@FXML
+	protected void GoNextRules2() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Rules2.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
+    	
+	}
+	
+	@FXML
+	protected void GoNextRules3() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Rules3.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
+    	
+	}
+	
+	@FXML
+	protected void GoBackRules2() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Rules2.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
+    	
+	}
+	
+	@FXML
+	protected void GoBackRules1() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Rules1.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		//System.out.println("Main Page"); 
+    	
+	}
 
 }
