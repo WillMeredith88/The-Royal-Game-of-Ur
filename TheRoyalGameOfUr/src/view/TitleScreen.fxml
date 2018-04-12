@@ -13,22 +13,22 @@
          <children>
             <Button fx:id="Instructions" layoutX="330.0" layoutY="576.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoInstructions" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #bf0909;" text="Intructions" textFill="WHITE">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Centaur" size="33.0" />
                </font>
             </Button>
             <Button fx:id="NewGame" layoutX="324.0" layoutY="464.0" mnemonicParsing="false" onAction="#GoNewGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="New Game" textFill="WHITE">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Centaur" size="33.0" />
                </font>
             </Button>
-            <Label layoutX="133.0" layoutY="224.0" prefHeight="111.0" prefWidth="701.0" text="The Royal Game Of Ur" textFill="WHITE">
+            <Label layoutX="116.0" layoutY="185.0" prefHeight="152.0" prefWidth="668.0" text="The Royal Game Of Ur" textFill="WHITE">
                <font>
-                  <Font size="64.0" />
+                  <Font name="Centaur" size="74.0" />
                </font>
             </Label>
             <Button fx:id="Instructions1" layoutX="330.0" layoutY="695.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoCredits" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #38a038;" text="Credits" textFill="WHITE">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Centaur" size="33.0" />
                </font>
             </Button>
          </children>
