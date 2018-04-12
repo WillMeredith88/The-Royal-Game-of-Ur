@@ -2,6 +2,8 @@ package application.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class GameBoard {
 	
@@ -66,13 +68,18 @@ public class GameBoard {
 		map.put("eleventButton", squares[3][2]);
 		map.put("tweleveButton", squares[4][0]);
 		map.put("thirteenButton", squares[4][1]);
+		
+		this.setBoard();
 	}
 	
 
 	/**
-	 * 
+	 * Calculates the possible moves based on a
+	 * dice roll. If the player does not already occupy this position
+	 * and the coordinates reference a valid square, then the
+	 * Sqaure will be added to an arraylist
 	 * @param current (Square)
-	 * @return
+	 * @return list (Square)
 	 */
 	public ArrayList<Square> getPossibleMove(Square current, int roll){
 		int row=current.getRow();
@@ -91,7 +98,7 @@ public class GameBoard {
 		}
 		
 		if(squares[row][col+roll] != null 
-				&& squares[row+rollCounter][col+roll].getIsHiddenPlayer()){
+				&& squares[row][col+roll].getIsHiddenPlayer()){
 			
 			list.add(squares[row][col+roll]);
 		}
@@ -122,10 +129,30 @@ public class GameBoard {
 				}
 			}
 		
+		/**
+		 * method should return a String representation of
+		 * the button that it corresponds to in the Hashmap
+		 * @param square
+		 * @return
+		 */
+		public String getButton(Square square){
+			Set<Entry<String,Square>> nameSet = map.entrySet();
+			
+			for(Entry<String, Square> intry:nameSet){
+				if(intry.getValue() == square){
+					return intry.getKey();
+				}
+			}
+			
+			
+			return null;
+			
+		}
 		
 		
-	
 		
-		
+		public Square getCurrent(){
+			return this.current;
+		}
 		
 }
