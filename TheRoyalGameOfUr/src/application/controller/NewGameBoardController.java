@@ -24,8 +24,10 @@ public class NewGameBoardController implements EventHandler{
 	Dice dice = new Dice();
 	Square current = board.getCurrent();
 	static ArrayList<Square> list = new ArrayList<Square>();
-	//ArrayList<Button> buttons = new ArrayList<Button>();
-	
+	ArrayList<Button> buttons = new ArrayList<Button>();
+	@FXML
+	Button bbb;
+	buttons.add(bbbb);
 	
 	
 	@FXML
