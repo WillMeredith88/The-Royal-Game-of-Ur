@@ -9,7 +9,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.GameBoardController">
    <children>
-      <AnchorPane prefHeight="900.0" prefWidth="900.0">
+      <AnchorPane prefHeight="900.0" prefWidth="900.0" style="-fx-background-image: url('application/images/game_bkg.png');">
          <children>
             <ImageView fitHeight="803.0" fitWidth="367.0" layoutX="290.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -135,11 +135,11 @@
                   <Button fx:id="twelveButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#tileHandler" opacity="0.0" prefHeight="144.0" prefWidth="190.0" style="-fx-background-color: #13f431; -fx-background-radius: 48;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
-            <Button fx:id="diceRollButton" layoutX="59.0" layoutY="305.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #2556a3;" text="Roll" textFill="WHITE">
+            <Button fx:id="diceRollButton" layoutX="27.0" layoutY="305.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="136.0" style="-fx-background-color: #2556a3;" text="Player Roll" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Label fx:id="diceRollLabel" layoutX="168.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
+            <Label fx:id="diceRollLabel" layoutX="190.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
                <font>
                   <Font size="42.0" />
                </font>
@@ -210,7 +210,7 @@
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Label layoutX="149.0" layoutY="295.0" prefHeight="62.0" prefWidth="14.0" text=":">
+            <Label layoutX="169.0" layoutY="294.0" prefHeight="62.0" prefWidth="14.0" text=":">
                <font>
                   <Font size="42.0" />
                </font>
@@ -292,10 +292,10 @@
             </ImageView>
             <Label layoutX="640.0" layoutY="300.0" text="AI Roll:">
                <font>
-                  <Font name="System Bold" size="40.0" />
+                  <Font size="40.0" />
                </font>
             </Label>
-            <Label fx:id="diceRollLabelAI" layoutX="793.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
+            <Label fx:id="diceRollLabelAI" layoutX="773.0" layoutY="298.0" prefHeight="56.0" prefWidth="50.0">
                <font>
                   <Font size="42.0" />
                </font>
