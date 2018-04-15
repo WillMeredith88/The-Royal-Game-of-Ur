@@ -28,9 +28,10 @@ public class GameBoardTwo {
 		this.aiPiecesRemaining = 7;
 		this.aiPiecesCompleted = 0;
 		this.list = new ArrayList<>();
+		this.turnCounter = 0;
 		
-		playerBoard = new int[15];
-		aiBoard = new int[15];
+		playerBoard = new int[16];
+		aiBoard = new int[16];
 
 	}
 
@@ -47,7 +48,7 @@ public class GameBoardTwo {
 			if (this.playerBoard[roll] == 0 && this.playerPiecesRemaining > 0) {
 				this.list.add(0);
 			}
-			for (int z = 0; z <= 14; z++) {
+			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
 				if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll != 7) {
 					this.list.add(z);
 				} else if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll == 7 && this.aiBoard[7] == 0) {
@@ -56,15 +57,12 @@ public class GameBoardTwo {
 			}
 		} 
 		
-		
-		
-		
 		else if(this.turnCounter == 1) {
 			if (this.aiBoard[roll] == 0 && this.aiPiecesRemaining > 0) {
 				this.list.add(0);
 			}
 			
-			for (int z = 0; z <= 14; z++) {
+			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
 				if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll != 7) {
 					this.list.add(z);
 				} else if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll == 7 && this.playerBoard[7] == 0) {

@@ -1,3 +1,11 @@
+/**
+ * 
+ * TODO: add in win conditions to the appropriate methods
+ * 		 add in the AI logic
+ *		 add extra roll for landing on special spaces
+ *		 change tileHandler method to handle method
+ */
+
 package application.controller;
 
 import java.util.HashMap;
@@ -64,8 +72,6 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 	}
 
-	private int turnCounter = 0;
-
 	@FXML
 	public void initialize() {
 
@@ -129,80 +135,75 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		aiTokenHashmap.put(13, token_ai_13);
 		aiTokenHashmap.put(14, token_ai_14);
 
-		token_ai_5.setVisible(true);
-		beginLabelAI.setText("6");
+		// Cleans the board up to start the game
+		boardUpdate();
 
-		// This is using the BoardUpdate method. Without it you'll see how we set up the
-		// demo
-		// If you uncomment this you'll see everything cleaned up because no actual
-		// moves have been made on the board.		
-		 boardUpdate();
-		 
-		 /*
-		 if (gameBoard.getAiPiecesCompleted() == 7) {
-			 System.out.println("You lose!");
-		 }
-		 else if(gameBoard.getPlayerPiecesCompleted() == 7) {
-			 System.out.println("You win!");
-		 } */
+		/*
+		 * if (gameBoard.getAiPiecesCompleted() == 7) { System.out.println("You lose!");
+		 * } else if(gameBoard.getPlayerPiecesCompleted() == 7) {
+		 * System.out.println("You win!"); }
+		 */
 	}
 
 	public void diceRoll(ActionEvent event) {
+
+		// This will roll the dice and find the allowable moves
 		gameBoard.allowableMoves();
-		showMoves();
-		diceRollButton.setDisable(true);
-	}
-	
-	
-	
-	@Override
-	public void handle(ActionEvent event) {
-		Button selected = (Button) event.getSource();
-		// player turn 1
-		if (turnCounter == 0) {
-			turnTracker.setText("Player");
-			diceRollButton.setDisable(false);
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("3");
+		System.out.println(gameBoard.getRollValue());
 
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
+		// Updates the screen with allowable moves and enables the appropriate buttons
+		// If the roll value is 0, nothing to update and moves on
+		if (gameBoard.getRollValue() != 0) {
+			showMoves();
+			diceRollButton.setDisable(true);
+		} else if(gameBoard.getRollValue() == 0) {
+			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 		}
+		// Disables the roll button so only allowable moves buttons are able to be
+		// clicked
+		//diceRollButton.setDisable(true);
 	}
 
-	
-	
 	public void tileHandler(ActionEvent event) {
 		Button selected = (Button) event.getSource();
-		// player turn 1
-		if (turnCounter == 0) {
-			if (selected.getId().equals("zeroButton")) {
-				zeroButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_3.setVisible(true);
-				beginLabel.setText("6");
-				processAITurn();
-				turnCounter++;
+		// Player's turn if getTurnCounter returns 0
+		if (gameBoard.getTurnCounter() == 0) {
+			for (HashMap.Entry<Integer, Button> entry : buttonHashmap.entrySet()) {
+				// Used to access key in the loop => Integer key = entry.getKey();
+				// Used to access button in the loop => Button value = entry.getValue();
+				// selected.getId()
+				if (entry.getValue().equals(selected)) {
+					gameBoard.getPlayerBoard()[entry.getKey()] = 0;
+					if (entry.getKey() + gameBoard.getRollValue() < 15) {
+						gameBoard.getPlayerBoard()[entry.getKey() + gameBoard.getRollValue()] = 1;
+					} else if (entry.getKey() + gameBoard.getRollValue() == 15) {
+						gameBoard.setPlayerPiecesCompleted(gameBoard.getPlayerPiecesCompleted() + 1);
+					}
+				}
+
+			}
+			if(buttonHashmap.get(0).equals(selected)) {
+				gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() - 1);
 			}
 		}
-
+		boardUpdate();
+		diceRollButton.setDisable(false);
 	}
 
 	public void showMoves() {
 
 		if (gameBoard.getTurnCounter() == 0) {
 			for (Integer allowable : gameBoard.getList()) {
-				if (allowable != null) {
+				if (allowable != null && allowable != -1) {
 					buttonHashmap.get(allowable).setOpacity(.5);
 					buttonHashmap.get(allowable).setDisable(false);
-					
+
 				}
 			}
 		}
-		
+
 		gameBoard.getList().clear();
-		if(gameBoard.getTurnCounter() == 0) {
+		if (gameBoard.getTurnCounter() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 		} else if (gameBoard.getTurnCounter() == 1) {
 			diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
@@ -233,6 +234,8 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 	}
 
+	/*
+	
 	public void processAITurn() {
 		PauseTransition pause = new PauseTransition(Duration.millis(1000));
 		PauseTransition pieceDelay = new PauseTransition(Duration.millis(1000));
@@ -252,7 +255,6 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			enableRollButton.play();
 		}
 
-		// AI turn 2
 		if (turnCounter == 1) {
 			turnTracker.setText("Computer");
 			diceRollButton.setDisable(true);
@@ -264,7 +266,6 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			enableRollButton.play();
 		}
 
-		// AI turn 3
 		if (turnCounter == 3) {
 			turnTracker.setText("Computer");
 			diceRollButton.setDisable(true);
@@ -278,7 +279,6 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			enableRollButton.play();
 		}
 
-		// AI turn 3
 		if (turnCounter == 4) {
 			turnTracker.setText("Computer");
 			diceRollButton.setDisable(true);
@@ -293,7 +293,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			enableRollButton.play();
 		}
 
-		// AI turn 3
+		
 		if (turnCounter == 5) {
 			turnTracker.setText("Computer");
 			diceRollButton.setDisable(true);
@@ -306,5 +306,12 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
 			enableRollButton.play();
 		}
+	}
+
+	*/
+	@Override
+	public void handle(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }
