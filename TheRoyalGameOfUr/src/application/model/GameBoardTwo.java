@@ -36,6 +36,7 @@ public class GameBoardTwo {
 
 	public List<Integer> allowableMoves() {
 		int roll = Dice.rollDice();
+		this.rollValue = roll;
 		
 		if(roll == 0) {
 			this.list.add(-1);

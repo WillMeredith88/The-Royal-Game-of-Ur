@@ -131,14 +131,30 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 		token_ai_5.setVisible(true);
 		beginLabelAI.setText("6");
-		
-		
-		//This is using the BoardUpdate method.  Without it you'll see how we set up the demo
-		//If you uncomment this you'll see everything cleaned up because no actual moves have been made on the board.
-		//boardUpdate();
-		
+
+		// This is using the BoardUpdate method. Without it you'll see how we set up the
+		// demo
+		// If you uncomment this you'll see everything cleaned up because no actual
+		// moves have been made on the board.		
+		 //boardUpdate();
+		 
+		 /*
+		 if (gameBoard.getAiPiecesCompleted() == 7) {
+			 System.out.println("You lose!");
+		 }
+		 else if(gameBoard.getPlayerPiecesCompleted() == 7) {
+			 System.out.println("You win!");
+		 } */
 	}
 
+	public void diceRoll(ActionEvent event) {
+		gameBoard.allowableMoves();
+		showMoves();
+		diceRollButton.setDisable(true);
+	}
+	
+	
+	
 	@Override
 	public void handle(ActionEvent event) {
 		Button selected = (Button) event.getSource();
@@ -153,81 +169,10 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(true);
 			}
 		}
-
-		// player turn 2
-		if (turnCounter == 1) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("2");
-
-				threeButton.setOpacity(.5);
-
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
-		}
-
-		// player turn 3
-		if (turnCounter == 2) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("3");
-
-				fiveButton.setOpacity(.5);
-
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
-		}
-
-		// player turn 4
-		if (turnCounter == 3) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("1");
-
-				eightButton.setOpacity(.5);
-
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
-		}
-
-		// player turn 5
-		if (turnCounter == 4) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("4");
-
-				eightButton.setOpacity(.5);
-				oneButton.setOpacity(.5);
-
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
-		}
-
-		// player turn 6
-		if (turnCounter == 5) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("1");
-
-				twelveButton.setOpacity(.5);
-				oneButton.setOpacity(.5);
-			}
-		}
-
-		// player turn 7
-		if (turnCounter == 6) {
-			if (selected.getId().equals("diceRollButton")) {
-				diceRollLabel.setText("2");
-
-				thirteenButton.setOpacity(.5);
-				oneButton.setOpacity(.5);
-
-				zeroButton.setOpacity(.5);
-				token_player_0.setVisible(true);
-			}
-		}
-
 	}
 
+	
+	
 	public void tileHandler(ActionEvent event) {
 		Button selected = (Button) event.getSource();
 		// player turn 1
@@ -242,94 +187,25 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			}
 		}
 
-		// player turn 2
-		else if (turnCounter == 1) {
-			if (selected.getId().equals("threeButton")) {
-				zeroButton.setOpacity(0);
-				threeButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_3.setVisible(false);
-				token_player_5.setVisible(true);
-				token_ai_5.setVisible(false);
-				beginLabelAI.setText("6");
-				processAITurn();
-				turnCounter++;
-			}
-		}
-		// player turn 3
-		else if (turnCounter == 2) {
-			if (selected.getId().equals("fiveButton")) {
-				zeroButton.setOpacity(0);
-				fiveButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_5.setVisible(false);
-				token_player_8.setVisible(true);
-				turnNotification.setText("Roll Again!");
-				turnCounter++;
-			}
-		}
-		// player turn 4
-		else if (turnCounter == 3) {
-			if (selected.getId().equals("zeroButton")) {
-				zeroButton.setOpacity(0);
-				eightButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_1.setVisible(true);
-				beginLabel.setText("5");
-				turnNotification.setText("");
-				processAITurn();
-				turnCounter++;
-			}
-		}
-
-		// player turn 5
-		else if (turnCounter == 4) {
-			if (selected.getId().equals("eightButton")) {
-				zeroButton.setOpacity(0);
-				eightButton.setOpacity(0);
-				oneButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_8.setVisible(false);
-				token_player_12.setVisible(true);
-				processAITurn();
-				turnCounter++;
-			}
-
-		}
-		// player turn 6
-		else if (turnCounter == 5) {
-			if (selected.getId().equals("twelveButton")) {
-				twelveButton.setOpacity(0);
-				oneButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_12.setVisible(false);
-				token_player_13.setVisible(true);
-				processAITurn();
-				turnCounter++;
-			}
-		}
-		// player turn 7
-		else if (turnCounter == 6) {
-			if (selected.getId().equals("thirteenButton")) {
-				thirteenButton.setOpacity(0);
-				oneButton.setOpacity(0);
-				zeroButton.setOpacity(0);
-				token_player_0.setVisible(false);
-				token_player_13.setVisible(false);
-				completeLabel.setText("1");
-				turnCounter++;
-			}
-		}
 	}
 
 	public void showMoves() {
 
 		if (gameBoard.getTurnCounter() == 0) {
 			for (Integer allowable : gameBoard.getList()) {
-				buttonHashmap.get(allowable).setOpacity(.5);
-				buttonHashmap.get(allowable).setDisable(false);
-				System.out.println(allowable);
+				if (allowable != null) {
+					buttonHashmap.get(allowable).setOpacity(.5);
+					buttonHashmap.get(allowable).setDisable(false);
+					
+				}
 			}
+		}
+		
+		gameBoard.getList().clear();
+		if(gameBoard.getTurnCounter() == 0) {
+			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
+		} else if (gameBoard.getTurnCounter() == 1) {
+			diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
 		}
 	}
 
@@ -353,8 +229,8 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		completeLabelAI.setText(Integer.toString(gameBoard.getAiPiecesCompleted()));
 		beginLabel.setText(Integer.toString(gameBoard.getPlayerPiecesRemaining()));
 		completeLabel.setText(Integer.toString(gameBoard.getPlayerPiecesCompleted()));
-		
-		
+		diceRollButton.setDisable(false);
+
 	}
 
 	public void processAITurn() {

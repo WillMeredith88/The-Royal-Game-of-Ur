@@ -135,7 +135,7 @@
                   <Button fx:id="twelveButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#tileHandler" opacity="0.0" prefHeight="144.0" prefWidth="190.0" style="-fx-background-color: #13f431; -fx-background-radius: 48;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
-            <Button fx:id="diceRollButton" layoutX="27.0" layoutY="305.0" mnemonicParsing="false" onAction="#handle" prefHeight="48.0" prefWidth="136.0" style="-fx-background-color: #2556a3;" text="Player Roll" textFill="WHITE">
+            <Button fx:id="diceRollButton" layoutX="27.0" layoutY="305.0" mnemonicParsing="false" onAction="#diceRoll" prefHeight="48.0" prefWidth="136.0" style="-fx-background-color: #2556a3;" text="Player Roll" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font></Button>
