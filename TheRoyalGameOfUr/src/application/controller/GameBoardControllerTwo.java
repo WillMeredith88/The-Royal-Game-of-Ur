@@ -136,7 +136,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		// demo
 		// If you uncomment this you'll see everything cleaned up because no actual
 		// moves have been made on the board.		
-		 //boardUpdate();
+		 boardUpdate();
 		 
 		 /*
 		 if (gameBoard.getAiPiecesCompleted() == 7) {
