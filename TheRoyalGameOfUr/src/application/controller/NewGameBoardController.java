@@ -81,7 +81,7 @@ public class NewGameBoardController implements EventHandler{
 		if(button.getId().equals(diceRollButton.getId())){
 			/*ArrayList<Square>*/ list = new ArrayList<>();
 			int roll = dice.rollDice();
-			diceRollLabel.setText(roll);
+			diceRollLabel.setText(Integer.toString(roll));
 			list = board.getPossibleMove(current, roll);
 			for(int i=0; i < list.size(); i++){
 				Square sq = list.get(i);

@@ -11,12 +11,12 @@
    <children>
       <AnchorPane prefHeight="900.0" prefWidth="900.0" style="-fx-background-image: url('images/title_bkg.png');">
          <children>
-            <Button fx:id="Instructions" layoutX="330.0" layoutY="576.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoInstructions" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #bf0909;" text="Intructions" textFill="WHITE">
+            <Button fx:id="Instructions" layoutX="325.0" layoutY="612.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoInstructions" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #bf0909;" text="Intructions" textFill="WHITE">
                <font>
                   <Font name="Centaur" size="33.0" />
                </font>
             </Button>
-            <Button fx:id="NewGame" layoutX="324.0" layoutY="464.0" mnemonicParsing="false" onAction="#GoNewGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="New Game" textFill="WHITE">
+            <Button fx:id="DemoGame" layoutX="325.0" layoutY="534.0" mnemonicParsing="false" onAction="#GoDemoGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="Demo" textFill="WHITE">
                <font>
                   <Font name="Centaur" size="33.0" />
                </font>
@@ -26,7 +26,12 @@
                   <Font name="Centaur" size="80.0" />
                </font>
             </Label>
-            <Button fx:id="Instructions1" layoutX="330.0" layoutY="695.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoCredits" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #38a038;" text="Credits" textFill="WHITE">
+            <Button fx:id="Instructions1" layoutX="325.0" layoutY="694.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GoCredits" prefHeight="63.0" prefWidth="240.0" style="-fx-background-color: #38a038;" text="Credits" textFill="WHITE">
+               <font>
+                  <Font name="Centaur" size="33.0" />
+               </font>
+            </Button>
+            <Button fx:id="NewGame" layoutX="325.0" layoutY="450.0" mnemonicParsing="false" onAction="#GoNewGame" prefHeight="62.0" prefWidth="252.0" style="-fx-background-color: darkblue;" text="New Game" textFill="WHITE">
                <font>
                   <Font name="Centaur" size="33.0" />
                </font>
