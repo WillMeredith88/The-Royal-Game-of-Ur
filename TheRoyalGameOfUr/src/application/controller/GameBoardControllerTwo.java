@@ -349,7 +349,12 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			buttonHashmap.get(z).setOpacity(0);
 			buttonHashmap.get(z).setDisable(true);
 		}
-
+		beginLabelAI.setText(Integer.toString(gameBoard.getAiPiecesRemaining()));
+		completeLabelAI.setText(Integer.toString(gameBoard.getAiPiecesCompleted()));
+		beginLabel.setText(Integer.toString(gameBoard.getPlayerPiecesRemaining()));
+		completeLabel.setText(Integer.toString(gameBoard.getPlayerPiecesCompleted()));
+		
+		
 	}
 
 	public void processAITurn() {
