@@ -4,6 +4,7 @@
  * 		 add in advanced AI logic
  *		 add extra roll for landing on special spaces
  *		 change tileHandler method to handle method
+ *		 add update to which player's turn it is
  */
 
 package application.controller;
