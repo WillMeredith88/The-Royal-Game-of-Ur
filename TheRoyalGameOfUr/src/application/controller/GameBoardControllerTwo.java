@@ -1,7 +1,7 @@
 /**
  * 
  * TODO: add in win conditions to the appropriate methods
- * 		 add in the AI logic
+ * 		 add in advanced AI logic
  *		 add extra roll for landing on special spaces
  *		 change tileHandler method to handle method
  */
