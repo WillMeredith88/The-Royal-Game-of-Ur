@@ -49,9 +49,9 @@ public class GameBoardTwo {
 				this.list.add(0);
 			}
 			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
-				if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll != 7) {
+				if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll != 8) {
 					this.list.add(z);
-				} else if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll == 7 && this.aiBoard[7] == 0) {
+				} else if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll == 8 && this.aiBoard[8] == 0) {
 					this. list.add(z);
 				}
 			}
@@ -63,9 +63,9 @@ public class GameBoardTwo {
 			}
 			
 			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
-				if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll != 7) {
+				if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll != 8) {
 					this.list.add(z);
-				} else if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll == 7 && this.playerBoard[7] == 0) {
+				} else if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll == 8 && this.playerBoard[8] == 0) {
 					this.list.add(z);
 				}
 				

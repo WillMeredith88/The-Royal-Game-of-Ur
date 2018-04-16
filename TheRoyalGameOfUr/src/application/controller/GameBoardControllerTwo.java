@@ -149,19 +149,22 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 		// This will roll the dice and find the allowable moves
 		gameBoard.allowableMoves();
-		System.out.println(gameBoard.getRollValue());
+		// System.out.println(gameBoard.getRollValue());
 
 		// Updates the screen with allowable moves and enables the appropriate buttons
 		// If the roll value is 0, nothing to update and moves on
 		if (gameBoard.getRollValue() != 0) {
 			showMoves();
 			diceRollButton.setDisable(true);
-		} else if(gameBoard.getRollValue() == 0) {
+		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
+			diceRollButton.setDisable(true);
+			processAITurn();
+			diceRollButton.setDisable(false);
 		}
 		// Disables the roll button so only allowable moves buttons are able to be
 		// clicked
-		//diceRollButton.setDisable(true);
+		// diceRollButton.setDisable(true);
 	}
 
 	public void tileHandler(ActionEvent event) {
@@ -176,17 +179,29 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 					gameBoard.getPlayerBoard()[entry.getKey()] = 0;
 					if (entry.getKey() + gameBoard.getRollValue() < 15) {
 						gameBoard.getPlayerBoard()[entry.getKey() + gameBoard.getRollValue()] = 1;
+
+						if (entry.getKey() + gameBoard.getRollValue() > 4
+								&& entry.getKey() + gameBoard.getRollValue() < 13) {
+
+							if (gameBoard.getAiBoard()[entry.getKey() + gameBoard.getRollValue()] == 1) {
+								gameBoard.getAiBoard()[entry.getKey() + gameBoard.getRollValue()] = 0;
+								gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() + 1);
+							}
+						}
+
 					} else if (entry.getKey() + gameBoard.getRollValue() == 15) {
 						gameBoard.setPlayerPiecesCompleted(gameBoard.getPlayerPiecesCompleted() + 1);
 					}
 				}
 
 			}
-			if(buttonHashmap.get(0).equals(selected)) {
+			if (buttonHashmap.get(0).equals(selected)) {
 				gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() - 1);
 			}
 		}
 		boardUpdate();
+		diceRollButton.setDisable(true);
+		processAITurn();
 		diceRollButton.setDisable(false);
 	}
 
@@ -234,81 +249,60 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 	}
 
-	/*
-	
 	public void processAITurn() {
 		PauseTransition pause = new PauseTransition(Duration.millis(1000));
 		PauseTransition pieceDelay = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
 		PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
-		// AI turn 1
-		if (turnCounter == 0) {
-			turnTracker.setText("Computer");
-			diceRollButton.setDisable(true);
-			diceRollLabelAI.setText("2");
-			beginLabelAI.setText("5");
-			pause.setOnFinished(event -> token_ai_2.setVisible(true));
-			pause.play();
-			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			pauseTurnLabel.play();
-			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			enableRollButton.play();
+		gameBoard.setTurnCounter(1);
+		gameBoard.allowableMoves();
+		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
+
+		// Used to store the Ai token that is closest to the end that can move
+		int farthestMove = -1;
+
+		if (gameBoard.getRollValue() != 0) {
+
+			for (Integer allowable : gameBoard.getList()) {
+				if (allowable != null && allowable != -1) {
+					if (allowable > farthestMove) {
+						farthestMove = allowable;
+					}
+				}
+			}
+			if (farthestMove == 0) {
+				gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() - 1);
+			}
+			gameBoard.getAiBoard()[farthestMove] = 0;
+			
+			if(farthestMove + gameBoard.getRollValue() < 15 ) {
+			gameBoard.getAiBoard()[farthestMove + gameBoard.getRollValue()] = 1;
+			} else if(farthestMove + gameBoard.getRollValue() == 15) {
+				gameBoard.setAiPiecesCompleted(gameBoard.getAiPiecesCompleted() + 1);
+			}
+			
+			if (farthestMove + gameBoard.getRollValue() > 4 && farthestMove + gameBoard.getRollValue() < 13) {
+
+				if (gameBoard.getPlayerBoard()[farthestMove + gameBoard.getRollValue()] == 1) {
+					gameBoard.getPlayerBoard()[farthestMove + gameBoard.getRollValue()] = 0;
+					gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() + 1);
+				}
+			}
+			// pause.setOnFinished(event -> token_ai_2.setVisible(true));
+			// pause.play();
+			// pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+			// pauseTurnLabel.play();
+			// enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+			// enableRollButton.play();
+		} else if (gameBoard.getRollValue() == 0) {
+			// What to do if the AI rolls a 0, if anything.
 		}
 
-		if (turnCounter == 1) {
-			turnTracker.setText("Computer");
-			diceRollButton.setDisable(true);
-			diceRollLabelAI.setText("0");
-			turnNotificationAI.setText("Skip Turn!");
-			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			pauseTurnLabel.play();
-			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			enableRollButton.play();
-		}
-
-		if (turnCounter == 3) {
-			turnTracker.setText("Computer");
-			diceRollButton.setDisable(true);
-			diceRollLabelAI.setText("3");
-			turnNotificationAI.setText("");
-			pause.setOnFinished(event -> token_ai_3.setVisible(true));
-			pause.play();
-			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			pauseTurnLabel.play();
-			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			enableRollButton.play();
-		}
-
-		if (turnCounter == 4) {
-			turnTracker.setText("Computer");
-			diceRollButton.setDisable(true);
-			diceRollLabelAI.setText("3");
-			pieceDelay.setOnFinished(event -> token_ai_3.setVisible(false));
-			pieceDelay.play();
-			pause.setOnFinished(event -> token_ai_6.setVisible(true));
-			pause.play();
-			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			pauseTurnLabel.play();
-			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			enableRollButton.play();
-		}
-
-		
-		if (turnCounter == 5) {
-			turnTracker.setText("Computer");
-			diceRollButton.setDisable(true);
-			diceRollLabelAI.setText("1");
-			beginLabelAI.setText("4");
-			pause.setOnFinished(event -> token_ai_1.setVisible(true));
-			pause.play();
-			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			pauseTurnLabel.play();
-			enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			enableRollButton.play();
-		}
+		boardUpdate();
+		gameBoard.setTurnCounter(0);
+		gameBoard.getList().clear();
 	}
 
-	*/
 	@Override
 	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
