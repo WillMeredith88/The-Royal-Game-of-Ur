@@ -5,7 +5,6 @@
  * 		 add in advanced AI logic
  *		 add extra roll for landing on special spaces
  *		 change tileHandler method to handle method
- *		 add update to which player's turn it is
  *		 UML
  *		 		
  *
@@ -147,7 +146,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 
 		// Cleans the board up to start the game
 		boardUpdate();
-
+		turnTracker.setText("Player's turn");
 		/*
 		 * if (gameBoard.getAiPiecesCompleted() == 7) { System.out.println("You lose!");
 		 * } else if(gameBoard.getPlayerPiecesCompleted() == 7) {
@@ -265,6 +264,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
 		PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
 		gameBoard.setTurnCounter(1);
+		turnTracker.setText("Computer's turn");
 		gameBoard.allowableMoves();
 		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
 
@@ -311,6 +311,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		boardUpdate();
 		gameBoard.setTurnCounter(0);
 		gameBoard.getList().clear();
+		turnTracker.setText("Player's turn");
 	}
 
 	@Override
