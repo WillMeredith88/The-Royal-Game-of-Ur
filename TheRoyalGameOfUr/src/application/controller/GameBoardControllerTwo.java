@@ -1,7 +1,6 @@
 /**
  * 
- * TODO: add in win conditions to the appropriate methods
- * 		 Win and Lose screens to swap to for win condition
+ * TODO: Win and Lose screens to swap to for win condition
  * 		 add in advanced AI logic
  *		 add extra roll for landing on special spaces
  *		 change tileHandler method to handle method
@@ -210,6 +209,15 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		}
 		boardUpdate();
 		diceRollButton.setDisable(true);
+		if(gameBoard.getPlayerPiecesCompleted() == 7) {
+			/**
+			 * TODO: add change to "You Win!" Scene here.
+			 */
+			
+			
+			System.out.println("You Win!");
+		}
+		
 		processAITurn();
 		diceRollButton.setDisable(false);
 	}
@@ -312,6 +320,14 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		gameBoard.setTurnCounter(0);
 		gameBoard.getList().clear();
 		turnTracker.setText("Player's turn");
+		if (gameBoard.getAiPiecesCompleted() == 7) {
+			/**
+			 * TODO: add change to "You lose" Scene here
+			 */
+			
+			System.out.println("YOU LOSE");
+		}
+		
 	}
 
 	@Override
