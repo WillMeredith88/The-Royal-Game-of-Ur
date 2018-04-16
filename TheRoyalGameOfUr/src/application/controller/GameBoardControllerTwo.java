@@ -1,10 +1,19 @@
 /**
  * 
  * TODO: add in win conditions to the appropriate methods
+ * 		 Win and Lose screens to swap to for win condition
  * 		 add in advanced AI logic
  *		 add extra roll for landing on special spaces
  *		 change tileHandler method to handle method
  *		 add update to which player's turn it is
+ *		 UML
+ *		 		
+ *
+ *possible extras:
+ *
+ *		 skins
+ *
+ *
  */
 
 package application.controller;
