@@ -21,7 +21,7 @@ public class TitleScreenController {
 	@FXML
 	protected void GoDemoGame() {
 		try {
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Gameboard.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Demo.fxml"));
 			Main.stage.setScene(new Scene(root, 900, 900));
 			Main.stage.show();
 		} catch (Exception e) {
@@ -34,7 +34,7 @@ public class TitleScreenController {
 	@FXML
 	protected void GoNewGame() {
 		try {
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/GameboardTwo.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Gameboard.fxml"));
 			Main.stage.setScene(new Scene(root, 900, 900));
 			Main.stage.show();
 		} catch (Exception e) {

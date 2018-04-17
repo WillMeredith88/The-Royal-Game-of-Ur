@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 public class NewGameBoardController implements EventHandler{
-	
+
 	Player player = new Player();
 	GameBoard board = new GameBoard(player);
 	Dice dice = new Dice();
@@ -26,8 +26,8 @@ public class NewGameBoardController implements EventHandler{
 	static ArrayList<Square> list = new ArrayList<Square>();
 	ArrayList<Button> buttons = new ArrayList<Button>();
 	@FXML
-	Button bbb;
-	buttons.add(bbbb);
+	//Button bbb;
+	//buttons.add(bbbb);
 	
 	
 	@FXML
@@ -102,9 +102,7 @@ public class NewGameBoardController implements EventHandler{
 		
 		
 	}
-	
-	
-	
+		
 	
 	/*public Button getButton(String str){
 		
@@ -116,7 +114,6 @@ public class NewGameBoardController implements EventHandler{
 	}*/
 	
 	
-	
-	
+		
 
 }

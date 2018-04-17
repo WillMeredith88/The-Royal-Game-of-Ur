@@ -1,158 +1,204 @@
 package application.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.List;
 
 public class GameBoard {
-	
-	
-	/**
-	 * I was thinking of setting up the board
-	 * as a 2-d array then making the extra pieces null
-	 * and handling them if a move function- Will
-	 */
-	Square[][] squares = new Square[8][3];
-	//Square[] squares = new Square[20];
-	HashMap<String, Square> map = new HashMap();
-	Player player;
-	Player AI;//AI may need its own class 
-	Dice dice[];
-	Square current;
-	
-	
-	
-	public GameBoard(Player player){
-		this.player = player;
-		this.current=squares[0][0];
-		
-		squares[0][0]= new Square(0,0);
-		squares[0][1]= new Square(0,0);
-		squares[0][2]= new Square(0,1);
-		squares[1][0]= new Square(0,2);
-		squares[1][1]= new Square(1,0);
-		squares[1][2]= new Square(1,1);
-		squares[2][0]= new Square(1,2);
-		squares[2][1]= new Square(2,0);
-		squares[2][2]= new Square(2,1);
-		squares[3][0]= new Square(2,2);
-		squares[3][1]= new Square(3,0);
-		squares[3][2]= new Square(3,1);
-		squares[4][0]= new Square(3,2);
-		squares[4][1]= new Square(4,0);
-		squares[4][2]= new Square(4,1);
-		squares[5][0]= new Square(4,2);
-		squares[5][1] = new Square(5,0);
-		squares[5][2] = new Square(5,1);
-		squares[6][0] = new Square(5,2);
-		squares[6][1] = new Square(6,0);
-		squares[6][2] = new Square(6,1);
-		squares[7][0] = new Square(7,0);
-		squares[7][1] = new Square(7,1);
-		squares[7][2] = new Square(7,2);
-		squares[8][0] = new Square(8,0);
-		squares[8][1] = new Square(8,1);
-		squares[8][2] = new Square(8,2);
-		map.put("zeroButton", squares[0][0]);
-		map.put("oneButton", squares[0][1]);
-		map.put("twoButton", squares[0][2]);
-		map.put("threeButton", squares[1][0]);
-		map.put("fourButton", squares[1][1]);
-		map.put("fiveButton", squares[1][2]);
-		map.put("sixButton", squares[2][0]);
-		map.put("sevenButton", squares[2][1]);
-		map.put("eightButton", squares[2][2]);
-		map.put("nineButton", squares[3][0]);
-		map.put("tenButton", squares[3][1]);
-		map.put("eleventButton", squares[3][2]);
-		map.put("tweleveButton", squares[4][0]);
-		map.put("thirteenButton", squares[4][1]);
-		
-		this.setBoard();
-	}
-	
 
-	/**
-	 * Calculates the possible moves based on a
-	 * dice roll. If the player does not already occupy this position
-	 * and the coordinates reference a valid square, then the
-	 * Sqaure will be added to an arraylist
-	 * @param current (Square)
-	 * @return list (Square)
-	 */
-	public ArrayList<Square> getPossibleMove(Square current, int roll){
-		int row=current.getRow();
-		int col=current.getCol();
-		//int roll=Dice.rollDice();
-		int rollCounter=roll;
+	// List is used for for allowable moves
+	// in the allowableMoves method
+	List<Integer> list;
+	
+	int playerPiecesRemaining;
+	int playerPiecesCompleted;
+	int aiPiecesRemaining;
+	int aiPiecesCompleted;
+
+	//turnCounter == 0; player's turn
+	//turnCounter == 1; ai's turn
+	int turnCounter;
+	int rollValue;
+
+	int[] playerBoard;
+	int[] aiBoard;
+
+	public GameBoard() {
+		this.playerPiecesRemaining = 7;
+		this.playerPiecesCompleted = 0;
+		this.aiPiecesRemaining = 7;
+		this.aiPiecesCompleted = 0;
+		this.list = new ArrayList<>();
+		this.turnCounter = 0;
 		
-		ArrayList<Square> list = new ArrayList<Square>();
+		playerBoard = new int[16];
+		aiBoard = new int[16];
+
+	}
+
+	public List<Integer> allowableMoves() {
+		int roll = Dice.rollDice();
+		this.rollValue = roll;
 		
-		for(int i=0; i<roll; i++){
-				if(squares[row+rollCounter][col+i] != null 
-						&& squares[row+rollCounter][col+i].getIsHiddenPlayer()){
-							list.add(squares[row+rollCounter][col+i]);
+		if(roll == 0) {
+			this.list.add(-1);
+			return list;
+		}
+		
+		if (this.turnCounter == 0) {
+			if (this.playerBoard[roll] == 0 && this.playerPiecesRemaining > 0) {
+				this.list.add(0);
 			}
+			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
+				if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll != 8) {
+					this.list.add(z);
+				} else if (this.playerBoard[z] == 1  && z + roll <= 15 && this.playerBoard[z + roll] == 0 && z + roll == 8 && this.aiBoard[8] == 0) {
+					this. list.add(z);
+				}
+			}
+		} 
 		
-		}
-		
-		if(squares[row][col+roll] != null 
-				&& squares[row][col+roll].getIsHiddenPlayer()){
+		else if(this.turnCounter == 1) {
+			if (this.aiBoard[roll] == 0 && this.aiPiecesRemaining > 0) {
+				this.list.add(0);
+			}
 			
-			list.add(squares[row][col+roll]);
+			for (int z = 1; z <= 14 && z + roll <= 15; z++) {
+				if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll != 8) {
+					this.list.add(z);
+				} else if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll == 8 && this.playerBoard[8] == 0) {
+					this.list.add(z);
+				}
+				
+				
+			}
 		}
-		
-		
+
 		return list;
 	}
-	
-	
-	
+
 	/**
-	 * 
+	 * @return the playerPiecesRemaining
 	 */
-		public void setBoard(){
-		
-		for(int row=0; row<8; row++){
-			for(int col=0; col < 3; col++){
-				
-					//set extra squares to null
-					if((row == 4 || row == 5) && col != 1)
-							this.squares[row][col] = null;
-					
-					//set the rosettes
-					if((row == 0 || row == 2) && (col != 1))
-						this.squares[row][col].setIsRosette();
-					
-					}
-				}
-			}
-		
-		/**
-		 * method should return a String representation of
-		 * the button that it corresponds to in the Hashmap
-		 * @param square
-		 * @return
-		 */
-		public String getButton(Square square){
-			Set<Entry<String,Square>> nameSet = map.entrySet();
-			
-			for(Entry<String, Square> intry:nameSet){
-				if(intry.getValue() == square){
-					return intry.getKey();
-				}
-			}
-			
-			
-			return null;
-			
-		}
-		
-		
-		
-		public Square getCurrent(){
-			return this.current;
-		}
-		
+	public int getPlayerPiecesRemaining() {
+		return playerPiecesRemaining;
+	}
+
+	/**
+	 * @param playerPiecesRemaining the playerPiecesRemaining to set
+	 */
+	public void setPlayerPiecesRemaining(int playerPiecesRemaining) {
+		this.playerPiecesRemaining = playerPiecesRemaining;
+	}
+
+	/**
+	 * @return the playerPiecesCompleted
+	 */
+	public int getPlayerPiecesCompleted() {
+		return playerPiecesCompleted;
+	}
+
+	/**
+	 * @param playerPiecesCompleted the playerPiecesCompleted to set
+	 */
+	public void setPlayerPiecesCompleted(int playerPiecesCompleted) {
+		this.playerPiecesCompleted = playerPiecesCompleted;
+	}
+
+	/**
+	 * @return the aiPiecesRemaining
+	 */
+	public int getAiPiecesRemaining() {
+		return aiPiecesRemaining;
+	}
+
+	/**
+	 * @param aiPiecesRemaining the aiPiecesRemaining to set
+	 */
+	public void setAiPiecesRemaining(int aiPiecesRemaining) {
+		this.aiPiecesRemaining = aiPiecesRemaining;
+	}
+
+	/**
+	 * @return the aiPiecesCompleted
+	 */
+	public int getAiPiecesCompleted() {
+		return aiPiecesCompleted;
+	}
+
+	/**
+	 * @param aiPiecesCompleted the aiPiecesCompleted to set
+	 */
+	public void setAiPiecesCompleted(int aiPiecesCompleted) {
+		this.aiPiecesCompleted = aiPiecesCompleted;
+	}
+
+	/**
+	 * @return the turnCounter
+	 */
+	public int getTurnCounter() {
+		return turnCounter;
+	}
+
+	/**
+	 * @param turnCounter the turnCounter to set
+	 */
+	public void setTurnCounter(int turnCounter) {
+		this.turnCounter = turnCounter;
+	}
+
+	/**
+	 * @return the rollValue
+	 */
+	public int getRollValue() {
+		return rollValue;
+	}
+
+	/**
+	 * @param rollValue the rollValue to set
+	 */
+	public void setRollValue(int rollValue) {
+		this.rollValue = rollValue;
+	}
+
+	/**
+	 * @return the playerBoard
+	 */
+	public int[] getPlayerBoard() {
+		return playerBoard;
+	}
+
+	/**
+	 * @param playerBoard the playerBoard to set
+	 */
+	public void setPlayerBoard(int[] playerBoard) {
+		this.playerBoard = playerBoard;
+	}
+
+	/**
+	 * @return the aiBoard
+	 */
+	public int[] getAiBoard() {
+		return aiBoard;
+	}
+
+	/**
+	 * @param aiBoard the aiBoard to set
+	 */
+	public void setAiBoard(int[] aiBoard) {
+		this.aiBoard = aiBoard;
+	}
+
+	/**
+	 * @return the list
+	 */
+	public List<Integer> getList() {
+		return list;
+	}
+
+	/**
+	 * @param list the list to set
+	 */
+	public void setList(List<Integer> list) {
+		this.list = list;
+	}
 }
