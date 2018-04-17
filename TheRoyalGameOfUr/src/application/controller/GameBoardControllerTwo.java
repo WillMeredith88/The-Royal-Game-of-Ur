@@ -18,6 +18,7 @@ package application.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import application.Main;
 import application.model.GameBoardTwo;
@@ -167,6 +168,7 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 			diceRollButton.setDisable(true);
+			boardUpdate();
 			processAITurn();
 			diceRollButton.setDisable(false);
 		}
@@ -189,11 +191,12 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 						gameBoard.getPlayerBoard()[entry.getKey() + gameBoard.getRollValue()] = 1;
 
 						if (entry.getKey() + gameBoard.getRollValue() > 4
-								&& entry.getKey() + gameBoard.getRollValue() < 13) {
-
+								&& entry.getKey() + gameBoard.getRollValue() < 13) {		
 							if (gameBoard.getAiBoard()[entry.getKey() + gameBoard.getRollValue()] == 1) {
 								gameBoard.getAiBoard()[entry.getKey() + gameBoard.getRollValue()] = 0;
-								gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() + 1);
+								gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() + 1);								
+								beginLabelAI.setText(Integer.toString(gameBoard.getAiPiecesRemaining()));
+
 							}
 						}
 
@@ -217,7 +220,6 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			
 			System.out.println("You Win!");
 		}
-		
 		processAITurn();
 		diceRollButton.setDisable(false);
 	}
@@ -275,11 +277,16 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 		turnTracker.setText("Computer's turn");
 		gameBoard.allowableMoves();
 		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
-
+		boardUpdate();
+		
 		// Used to store the Ai token that is closest to the end that can move
 		int farthestMove = -1;
 
 		if (gameBoard.getRollValue() != 0) {
+			
+		/**
+		 * TODO: add a delay here
+		 */
 
 			for (Integer allowable : gameBoard.getList()) {
 				if (allowable != null && allowable != -1) {
@@ -313,9 +320,11 @@ public class GameBoardControllerTwo implements EventHandler<ActionEvent> {
 			// enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
 			// enableRollButton.play();
 		} else if (gameBoard.getRollValue() == 0) {
-			// What to do if the AI rolls a 0, if anything.
+			/**
+			 * TODO: add a delay here
+			 */
 		}
-
+		
 		boardUpdate();
 		gameBoard.setTurnCounter(0);
 		gameBoard.getList().clear();
