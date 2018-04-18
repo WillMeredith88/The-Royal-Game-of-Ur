@@ -168,6 +168,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 			diceRollButton.setDisable(true);
+			turnNotification.setText("Sorry!");
 			boardUpdate();
 			processAITurn();
 			//diceRollButton.setDisable(false);
@@ -232,7 +233,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				if (allowable != null && allowable != -1) {
 					buttonHashmap.get(allowable).setOpacity(.5);
 					buttonHashmap.get(allowable).setDisable(false);
-
 				}
 			}
 		}
@@ -246,7 +246,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 
 	public void boardUpdate() {
-		//PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
+		PauseTransition pauseTurnNotificationPlayer = new PauseTransition(Duration.millis(1000));
+		PauseTransition pauseTurnNotificationAI = new PauseTransition(Duration.millis(1000));
 		for (int z = 0; z <= 14; z++) {
 			if (gameBoard.getPlayerBoard()[z] == 1) {
 				playerTokenHashmap.get(z).setVisible(true);
@@ -267,7 +268,10 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		beginLabel.setText(Integer.toString(gameBoard.getPlayerPiecesRemaining()));
 		completeLabel.setText(Integer.toString(gameBoard.getPlayerPiecesCompleted()));
 		turnNotificationAI.setText("");
-		turnNotification.setText("");
+		pauseTurnNotificationPlayer.setOnFinished(event -> turnNotification.setText(""));
+		pauseTurnNotificationPlayer.play();
+		pauseTurnNotificationAI.setOnFinished(event -> turnNotificationAI.setText(""));
+		pauseTurnNotificationAI.play();
 		//diceRollButton.setDisable(false);
 
 	}
@@ -315,6 +319,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() + 1);
 				}
 			}
+		} else if(gameBoard.getRollValue() == 0) {
+			turnNotificationAI.setText("Sorry!");
 		}
 		
 		pauseBoardUpdate.setOnFinished(event -> boardUpdate());
