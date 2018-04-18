@@ -17,8 +17,8 @@
 package application.controller;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+//import java.util.List;
+//import java.util.concurrent.TimeUnit;
 
 import application.Main;
 import application.model.GameBoard;
@@ -146,7 +146,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 
 		// Cleans the board up to start the game
 		boardUpdate();
-		turnTracker.setText("Player's turn");
+		turnTracker.setText("Player");
 		/*
 		 * if (gameBoard.getAiPiecesCompleted() == 7) { System.out.println("You lose!");
 		 * } else if(gameBoard.getPlayerPiecesCompleted() == 7) {
@@ -170,7 +170,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			diceRollButton.setDisable(true);
 			boardUpdate();
 			processAITurn();
-			diceRollButton.setDisable(false);
+			//diceRollButton.setDisable(false);
 		}
 		// Disables the roll button so only allowable moves buttons are able to be
 		// clicked
@@ -202,7 +202,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 
 					} else if (entry.getKey() + gameBoard.getRollValue() == 15) {
 						gameBoard.setPlayerPiecesCompleted(gameBoard.getPlayerPiecesCompleted() + 1);
-					}
+					} 
 				}
 
 			}
@@ -213,15 +213,16 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		boardUpdate();
 		diceRollButton.setDisable(true);
 		if(gameBoard.getPlayerPiecesCompleted() == 7) {
+			// disable the roll button to prevent the game from breaking
+			diceRollButton.setDisable(false);
 			/**
 			 * TODO: add change to "You Win!" Scene here.
 			 */
-			
-			
+					
 			System.out.println("You Win!");
 		}
 		processAITurn();
-		diceRollButton.setDisable(false);
+		//diceRollButton.setDisable(false);
 	}
 
 	public void showMoves() {
@@ -245,6 +246,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 
 	public void boardUpdate() {
+		//PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
 		for (int z = 0; z <= 14; z++) {
 			if (gameBoard.getPlayerBoard()[z] == 1) {
 				playerTokenHashmap.get(z).setVisible(true);
@@ -264,17 +266,22 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		completeLabelAI.setText(Integer.toString(gameBoard.getAiPiecesCompleted()));
 		beginLabel.setText(Integer.toString(gameBoard.getPlayerPiecesRemaining()));
 		completeLabel.setText(Integer.toString(gameBoard.getPlayerPiecesCompleted()));
-		diceRollButton.setDisable(false);
+		turnNotificationAI.setText("");
+		turnNotification.setText("");
+		//diceRollButton.setDisable(false);
 
 	}
 
 	public void processAITurn() {
-		PauseTransition pause = new PauseTransition(Duration.millis(1000));
-		PauseTransition pieceDelay = new PauseTransition(Duration.millis(1000));
+		// pause transitions will add a delay to the AI moves for better visibility 
+		PauseTransition pauseBoardUpdate = new PauseTransition(Duration.millis(1000));
+		PauseTransition pauseTurnCounter = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
-		PauseTransition enableRollButton = new PauseTransition(Duration.millis(1500));
+		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(1500));
+		
 		gameBoard.setTurnCounter(1);
-		turnTracker.setText("Computer's turn");
+		turnTracker.setText("Computer");
+		diceRollButton.setDisable(true);
 		gameBoard.allowableMoves();
 		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
 		boardUpdate();
@@ -283,11 +290,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		int farthestMove = -1;
 
 		if (gameBoard.getRollValue() != 0) {
-			
-		/**
-		 * TODO: add a delay here
-		 */
-
 			for (Integer allowable : gameBoard.getList()) {
 				if (allowable != null && allowable != -1) {
 					if (allowable > farthestMove) {
@@ -313,23 +315,21 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() + 1);
 				}
 			}
-			// pause.setOnFinished(event -> token_ai_2.setVisible(true));
-			// pause.play();
-			// pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-			// pauseTurnLabel.play();
-			// enableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-			// enableRollButton.play();
-		} else if (gameBoard.getRollValue() == 0) {
-			/**
-			 * TODO: add a delay here
-			 */
 		}
 		
-		boardUpdate();
-		gameBoard.setTurnCounter(0);
+		pauseBoardUpdate.setOnFinished(event -> boardUpdate());
+		pauseBoardUpdate.play();
+		pauseTurnCounter.setOnFinished(event -> gameBoard.setTurnCounter(0));
+		pauseTurnCounter.play();
 		gameBoard.getList().clear();
-		turnTracker.setText("Player's turn");
+		pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+		pauseTurnLabel.play();
+		pauseEnableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+		pauseEnableRollButton.play();
+		
 		if (gameBoard.getAiPiecesCompleted() == 7) {
+			// disable the roll button to prevent the game from breaking
+			diceRollButton.setDisable(false);
 			/**
 			 * TODO: add change to "You lose" Scene here
 			 */
