@@ -221,6 +221,12 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			
 		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
+			
+			die1.setImage(tetraDice1);
+			die2.setImage(tetraDice3);
+			die3.setImage(tetraDice1);
+			die4.setImage(tetraDice3);
+			
 			diceRollButton.setDisable(true);
 			turnNotification.setText("Sorry!");
 			boardUpdate();
