@@ -315,6 +315,10 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
+            <ImageView fx:id="die1" fitHeight="83.0" fitWidth="85.0" layoutX="32.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="die3" fitHeight="83.0" fitWidth="100.0" layoutX="32.0" layoutY="507.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="die2" fitHeight="83.0" fitWidth="96.0" layoutX="137.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="die4" fitHeight="83.0" fitWidth="100.0" layoutX="158.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

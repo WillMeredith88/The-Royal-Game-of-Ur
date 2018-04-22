@@ -31,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -56,6 +57,29 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	private Label diceRollLabel, diceRollLabelAI, beginLabel, beginLabelAI, completeLabel, completeLabelAI,
 			turnNotification, turnNotificationAI, turnTracker;
 
+	
+	
+	@FXML ImageView die1, die2, die3, die4, die5, die6;
+	
+	@FXML
+	Image tetraDice1 = new Image("file:TetraDice_0_v1.png");
+	@FXML
+	Image tetraDice2 = new Image("file:TetraDice_0_v2.png");
+	@FXML
+	Image tetraDice3 = new Image("file:TetraDice_0_v3.png");
+	@FXML
+	Image tetraDice4 = new Image("file:TetraDice_1_v1.png");
+	@FXML
+	Image tetraDice5 = new Image("file:TetraDice_1_v2.png");
+	@FXML
+	Image tetraDice6 = new Image("file:TetraDice_1_v3.png");
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Hashmaps that store Buttons, and the images for tokens of pieces. Button 0 is
 	 * stored at key 0... etc.
@@ -165,6 +189,36 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		if (gameBoard.getRollValue() != 0) {
 			showMoves();
 			diceRollButton.setDisable(true);
+			
+			
+			//set the dice images
+			if(gameBoard.getRollValue() == 4){
+				die1.setImage(tetraDice6);
+				die2.setImage(tetraDice5);
+				die3.setImage(tetraDice6);
+				die4.setImage(tetraDice4);
+			}else if(gameBoard.getRollValue() == 3){
+				die1.setImage(tetraDice6);
+				die2.setImage(tetraDice1);
+				die3.setImage(tetraDice5);
+				die4.setImage(tetraDice4);
+			}else if(gameBoard.getRollValue() == 2){
+				die1.setImage(tetraDice6);
+				die2.setImage(tetraDice1);
+				die3.setImage(tetraDice1);
+				die4.setImage(tetraDice6);
+			}else if(gameBoard.getRollValue() == 1){
+				die1.setImage(tetraDice2);
+				die2.setImage(tetraDice3);
+				die3.setImage(tetraDice6);
+				die4.setImage(tetraDice1);
+			}
+
+			
+			
+			
+			
+			
 		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 			diceRollButton.setDisable(true);
