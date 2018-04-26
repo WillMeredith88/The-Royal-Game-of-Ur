@@ -74,11 +74,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	@FXML
 	Image tetraDice6 = new Image("file:TetraDice_1_v3.png");
 	
-	
-	
-	
-	
-	
+		
 	
 	/**
 	 * Hashmaps that store Buttons, and the images for tokens of pieces. Button 0 is
@@ -340,6 +336,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		// pause transitions will add a delay to the AI moves for better visibility 
 		PauseTransition pauseBoardUpdate = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnCounter = new PauseTransition(Duration.millis(1000));
+		PauseTransition pauseProcessAIAgain = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
 		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(1500));
 		
@@ -350,7 +347,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
 		boardUpdate();
 		
-		// Used to store the Ai token that is closest to the end that can move
 		int farthestMove = -1;
 
 		if (gameBoard.getRollValue() != 0) {
@@ -365,12 +361,18 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() - 1);
 			}
 			gameBoard.getAiBoard()[farthestMove] = 0;
-			
-			if(farthestMove + gameBoard.getRollValue() < 15 ) {
-			gameBoard.getAiBoard()[farthestMove + gameBoard.getRollValue()] = 1;
-			} else if(farthestMove + gameBoard.getRollValue() == 15) {
+			if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
+				gameBoard.getAiBoard()[farthestMove+gameBoard.getRollValue()] = 1;
+				turnNotificationAI.setText("Roll Again!");
+				//processAITurn();
+			}
+			else if(farthestMove + gameBoard.getRollValue() == 15) {
 				gameBoard.setAiPiecesCompleted(gameBoard.getAiPiecesCompleted() + 1);
 			}
+			else if(farthestMove + gameBoard.getRollValue() < 15  && farthestMove + gameBoard.getRollValue() != 14 || farthestMove + gameBoard.getRollValue() != 8 || farthestMove + gameBoard.getRollValue() != 4) {
+			gameBoard.getAiBoard()[farthestMove + gameBoard.getRollValue()] = 1;
+			} 
+			
 			
 			if (farthestMove + gameBoard.getRollValue() > 4 && farthestMove + gameBoard.getRollValue() < 13) {
 
@@ -383,6 +385,14 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			turnNotificationAI.setText("Sorry!");
 		}
 		
+		if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
+			pauseBoardUpdate.setOnFinished(event -> boardUpdate());
+			pauseBoardUpdate.play();
+			pauseProcessAIAgain.setOnFinished(event -> processAITurn());
+			pauseProcessAIAgain.play();
+			
+		}
+		
 		pauseBoardUpdate.setOnFinished(event -> boardUpdate());
 		pauseBoardUpdate.play();
 		pauseTurnCounter.setOnFinished(event -> gameBoard.setTurnCounter(0));
@@ -392,6 +402,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		pauseTurnLabel.play();
 		pauseEnableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
 		pauseEnableRollButton.play();
+		
+		
 		
 		if (gameBoard.getAiPiecesCompleted() == 7) {
 			// disable the roll button to prevent the game from breaking
