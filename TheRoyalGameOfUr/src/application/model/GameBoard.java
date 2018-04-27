@@ -55,7 +55,7 @@ public class GameBoard {
 	public List<Integer> allowableMoves() {
 		int roll = Dice.rollDice();
 		this.rollValue = roll;
-		
+		this.getList().clear();
 		// if the roll returns a 0, add a -1 to the list
 		if(roll == 0) {
 			this.list.add(-1);
