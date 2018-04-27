@@ -262,6 +262,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 
 		} else if (gameBoard.getList().isEmpty()) {
+			turnNotification.setText("No possible moves!");
 			if (gameBoard.getRollValue() != 0) {
 				diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 				// set the dice images
