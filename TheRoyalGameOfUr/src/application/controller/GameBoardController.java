@@ -204,7 +204,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	 * diceRoll takes an ActionEvent and processes a random roll of the dice using
 	 * the Dice and GameBoard model classes. Images corresponding to a matching dice
 	 * roll are also displayed for the player only. The moves from the roll(s) are
-	 * shown on the board and finally the AI turn is processed.
+	 * shown on the board and finally the AI turn is processed. This method will
+	 * also pass the turn to AI if the player has no allowable moves.
 	 * 
 	 * @param event
 	 *            ActionEvent button click that processes the dice roll for the
