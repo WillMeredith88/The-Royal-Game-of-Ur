@@ -3,6 +3,12 @@ package application.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GameBoard is the main model for the game. This class uses arrays to track the pieces on the gameboard, and 
+ * processes player and ai moves based on the availability of spaces. 
+ * @author David Thomas (github: vandorf594)
+ *
+ */
 public class GameBoard {
 
 	// List is used for for allowable moves
@@ -22,6 +28,10 @@ public class GameBoard {
 	int[] playerBoard;
 	int[] aiBoard;
 
+	/**
+	 * GameBoard constructor to create GameBoard objects. This contains the pieces remaining and completed
+	 * for both player and ai, as well as the list of available moves for both player and ai.
+	 */
 	public GameBoard() {
 		this.playerPiecesRemaining = 7;
 		this.playerPiecesCompleted = 0;
@@ -35,6 +45,13 @@ public class GameBoard {
 
 	}
 
+	/**
+	 * allowableMoves will use arithmetic to process the player and ai moves, and update the array with a 1 or 0 whether 
+	 * or not a piece occupies the space. Special consideration is taken for the '8' rosette square as a player or ai piece
+	 * cannot be captured in that location.
+	 * 
+	 * @return List<Integer> updated list of pieces currently on the board.
+	 */
 	public List<Integer> allowableMoves() {
 		int roll = Dice.rollDice();
 		this.rollValue = roll;
@@ -68,12 +85,9 @@ public class GameBoard {
 					this.list.add(z);
 				} else if (this.aiBoard[z] == 1  && z + roll <= 15 && this.aiBoard[z + roll] == 0 && z + roll == 8 && this.playerBoard[8] == 0) {
 					this.list.add(z);
-				}
-				
-				
+				}			
 			}
 		}
-
 		return list;
 	}
 
