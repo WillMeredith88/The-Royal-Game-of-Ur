@@ -13,7 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
+/**
+ * DemoController will control the Demo.fxml document. This class's primary function is to 
+ * provide a scripted set of moves to a player who selects "Demo" from the Title screen.
+ * 
+ * @author Jared Andrzejewski (github: JaredAndrz)
+ * @author David Thomas (github: vandorf594)
+ * @author Will Nester (github: willanet97)
+ *
+ */
 public class DemoController implements EventHandler<ActionEvent> {
 	
 	@FXML
@@ -33,7 +41,10 @@ public class DemoController implements EventHandler<ActionEvent> {
 	    
 	@FXML
 	private Label diceRollLabel, diceRollLabelAI, beginLabel, beginLabelAI, completeLabel, completeLabelAI, turnNotification, turnNotificationAI, turnTracker;
-		
+	
+	/**
+	 * GoMenu will update the scene to show TitleScreen.fxml through a button on Demo.fxml.
+	 */
 	@FXML
 	protected void GoMenu() {
 		try {
@@ -42,19 +53,27 @@ public class DemoController implements EventHandler<ActionEvent> {
 			Main.stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		//System.out.println("Main Page"); 
-	    	
-		}
+		}     	
+	}
 	
 	private int turnCounter = 0;
 	
+	/**
+	 * initialize will initialize the Demo Gameboard with a starting condition for the user to see.
+	 */
 	@FXML
 	public void initialize(){
 		token_ai_5.setVisible(true);
 		beginLabelAI.setText("6");
 	}
 	
+	/**
+	 * handle will take an ActionEvent of button clicks that will move pieces for the player. This
+	 * method provides a scripted sequence of actions where all moves and rolls are hardcoded for the player.
+	 * The only thing this method handles is player rolls
+	 * 
+	 * @param event ActionEvent that represents a button click for rolling the dice.
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		Button selected = (Button) event.getSource();
@@ -145,6 +164,11 @@ public class DemoController implements EventHandler<ActionEvent> {
 		
 	}
 	
+	/**
+	 * tileHandler will take an ActionEvent button click that will update the gameboard and 
+	 * show the player piece moves. The button to be clicked will light up green.
+	 * @param event ActionEvent that represents a button click of piece movements.
+	 */
 	public void tileHandler(ActionEvent event){
 		Button selected = (Button) event.getSource();
 		// player turn 1
@@ -234,11 +258,17 @@ public class DemoController implements EventHandler<ActionEvent> {
 				token_player_0.setVisible(false);
 				token_player_13.setVisible(false);
 				completeLabel.setText("1");
+				diceRollButton.setDisable(true);
 				turnCounter++;
 			}		
 		}
 	}
 
+	/**
+	 * processAITurn will move the pieces for the AI. A pause transition was added to 
+	 * slow the moves down and give the player a chance to process what actions the AI took.
+	 * All AI events are scripted / hard-coded.
+	 */
 	public void processAITurn(){
 		PauseTransition pause = new PauseTransition(Duration.millis(1000));
 		PauseTransition pieceDelay = new PauseTransition(Duration.millis(1000));
@@ -284,7 +314,7 @@ public class DemoController implements EventHandler<ActionEvent> {
 				enableRollButton.play();	
 			}
 			
-			// AI turn 3
+			// AI turn 4
 			if(turnCounter == 4){
 				turnTracker.setText("Computer");
 				diceRollButton.setDisable(true);
@@ -299,7 +329,7 @@ public class DemoController implements EventHandler<ActionEvent> {
 				enableRollButton.play();
 			}
 			
-			// AI turn 3
+			// AI turn 5
 			if(turnCounter == 5){
 				turnTracker.setText("Computer");
 				diceRollButton.setDisable(true);
