@@ -314,6 +314,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	 *            ActionEvent button click that moves the piece the player selects.
 	 */
 	public void tileHandler(ActionEvent event) {
+		int storeEntryKeyValue = -1;
+		
 		Button selected = (Button) event.getSource();
 		// Player's turn if getTurnCounter returns 0
 		if (gameBoard.getTurnCounter() == 0) {
@@ -322,6 +324,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				// Used to access button in the loop => Button value = entry.getValue();
 				// selected.getId()
 				if (entry.getValue().equals(selected)) {
+					storeEntryKeyValue = entry.getKey();
 					gameBoard.getPlayerBoard()[entry.getKey()] = 0;
 					if (entry.getKey() + gameBoard.getRollValue() < 15) {
 						gameBoard.getPlayerBoard()[entry.getKey() + gameBoard.getRollValue()] = 1;
@@ -340,13 +343,20 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 						gameBoard.setPlayerPiecesCompleted(gameBoard.getPlayerPiecesCompleted() + 1);
 					}
 				}
-
 			}
 			if (buttonHashmap.get(0).equals(selected)) {
 				gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() - 1);
 			}
 		}
 		boardUpdate();
+		if(storeEntryKeyValue != -1 && storeEntryKeyValue + gameBoard.getRollValue() == 4 || storeEntryKeyValue + gameBoard.getRollValue() == 8 
+				|| storeEntryKeyValue + gameBoard.getRollValue() == 14) {
+			diceRollButton.setDisable(false);
+			turnNotification.setText("Roll Again!");
+			return;
+		}
+			
+			
 		diceRollButton.setDisable(true);
 		if (gameBoard.getPlayerPiecesCompleted() == 7) {
 			// disable the roll button to prevent the game from breaking
