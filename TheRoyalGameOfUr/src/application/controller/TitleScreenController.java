@@ -6,7 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
+/**
+ * TitleScreenController will controll TitleScreen.fxml, the landing page for The Royal Game of Ur.
+ * This controller will switch the scene to the following fxml: GameBoard.fxml, Rules1.fxml, Demo.fxml, Credits.fxml
+ * 
+ * @author Will Nester (willanet97)
+ *
+ */
 public class TitleScreenController {
 	
 	@FXML
@@ -18,6 +24,9 @@ public class TitleScreenController {
 	@FXML
     private Button DemoGame;
 	
+	/**
+	 * GoDemoGame will switch the scene to Demo.fxml
+	 */
 	@FXML
 	protected void GoDemoGame() {
 		try {
@@ -31,6 +40,9 @@ public class TitleScreenController {
     	
 	}
 	
+	/**
+	 * GoNewGame will switch the scene to GameBoard.fxml
+	 */
 	@FXML
 	protected void GoNewGame() {
 		try {
@@ -44,6 +56,9 @@ public class TitleScreenController {
     	
 	}
 	
+	/**
+	 * GoInstructions will switch the scene to Rules1.fxml
+	 */
 	@FXML
 	protected void GoInstructions() {
 		try {
@@ -57,6 +72,9 @@ public class TitleScreenController {
     	
 	}
 	
+	/**
+	 * GoCredits will switch the scene to Credits.fxml
+	 */
 	@FXML
 	protected void GoCredits() {
 		try {
