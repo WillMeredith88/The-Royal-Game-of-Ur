@@ -7,11 +7,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
+/**
+ * InstructionsController will control Rules1.fxml, Rules2.fxml, Rules3.fxml, and Credits.fxml. This controller will
+ * also provide functionality for returning to the main menu.
+ * 
+ * @author Jared Andrzejewski (github: JaredAndrz)
+ * @author Will Nester (github: willianet97)
+ *
+ */
 public class InstructionsController {
 	
 	@FXML
 	public Button GoMenu;
 	
+	/**
+	 * GoMenu will switch the current scene to TitleScreen.fxml whenever the main menu button is pressed.
+	 */
 	@FXML
 	protected void GoMenu() {
 		try {
@@ -20,11 +31,12 @@ public class InstructionsController {
 			Main.stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		//System.out.println("Main Page"); 
-    	
+		} 	
 	}
 	
+	/**
+	 * GoNextRules2 will switch the scene from Rules1.fxml to Rules2.fxml through a button click.
+	 */
 	@FXML
 	protected void GoNextRules2() {
 		try {
@@ -34,10 +46,11 @@ public class InstructionsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		//System.out.println("Main Page"); 
-    	
 	}
 	
+	/**
+	 * GoNextRules3 will switch the scene from Rules2.fxml to Rules3.fxml through a button click.
+	 */
 	@FXML
 	protected void GoNextRules3() {
 		try {
@@ -47,10 +60,11 @@ public class InstructionsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		//System.out.println("Main Page"); 
-    	
 	}
 	
+	/**
+	 * GoBackRules2 will switch the scene from Rules3.fxml to Rules2.fxml through a button click.
+	 */
 	@FXML
 	protected void GoBackRules2() {
 		try {
@@ -60,10 +74,11 @@ public class InstructionsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		//System.out.println("Main Page"); 
-    	
 	}
 	
+	/**
+	 * GoBackRules1 will switch the scene from Rules2.fxml to Rules1.fxml through a button click.
+	 */
 	@FXML
 	protected void GoBackRules1() {
 		try {
@@ -72,9 +87,6 @@ public class InstructionsController {
 			Main.stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		//System.out.println("Main Page"); 
-    	
+		}     	
 	}
-
 }

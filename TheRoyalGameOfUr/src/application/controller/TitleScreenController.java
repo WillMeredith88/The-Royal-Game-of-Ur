@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
  * TitleScreenController will controll TitleScreen.fxml, the landing page for The Royal Game of Ur.
  * This controller will switch the scene to the following fxml: GameBoard.fxml, Rules1.fxml, Demo.fxml, Credits.fxml
  * 
- * @author Will Nester (willanet97)
+ * @author Will Nester (willianet97)
  *
  */
 public class TitleScreenController {

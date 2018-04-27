@@ -19,7 +19,7 @@ import javafx.util.Duration;
  * 
  * @author Jared Andrzejewski (github: JaredAndrz)
  * @author David Thomas (github: vandorf594)
- * @author Will Nester (github: willanet97)
+ * @author Will Nester (github: willianet97)
  *
  */
 public class DemoController implements EventHandler<ActionEvent> {

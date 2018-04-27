@@ -35,6 +35,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+/**
+ * GameBoardController controls GameBoard.fxml. This controller will process user input, update the gameboard, 
+ * and process AI turns. This controller handles all graphical updates to the gameboard for both the user and AI.
+ * 
+ * @author David Thomas (github: vandorf594)
+ * @author Jared Andrzejewski (github: JaredAndrz)
+ * @author Will Meredith (github: WillMeredith88)
+ *
+ */
 public class GameBoardController implements EventHandler<ActionEvent> {
 
 	@FXML
@@ -76,7 +85,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	
 		
 	
-	/**
+	/*
 	 * Hashmaps that store Buttons, and the images for tokens of pieces. Button 0 is
 	 * stored at key 0... etc.
 	 */
@@ -88,6 +97,9 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 
 	GameBoard gameBoard;
 
+	/**
+	 * GoMenu will switch the current scene to TitleScreen.fxml
+	 */
 	@FXML
 	protected void GoMenu() {
 		try {
@@ -101,6 +113,10 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * initialize sets up the starting condition of all images and buttons, initializing them into Hashmaps.
+	 * It updates the GameBoard model then starts the player's turn.
+	 */
 	@FXML
 	public void initialize() {
 
@@ -174,18 +190,22 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		 */
 	}
 
+	/**
+	 * diceRoll takes an ActionEvent and processes a random roll of the dice using the Dice and GameBoard model classes.
+	 * Images corresponding to a matching dice roll are also displayed for the player only. The moves from the roll(s) 
+	 * are shown on the board and finally the AI turn is processed.
+	 * @param event ActionEvent button click that processes the dice roll for the player.
+	 */
 	public void diceRoll(ActionEvent event) {
 
 		// This will roll the dice and find the allowable moves
 		gameBoard.allowableMoves();
-		// System.out.println(gameBoard.getRollValue());
 
 		// Updates the screen with allowable moves and enables the appropriate buttons
 		// If the roll value is 0, nothing to update and moves on
 		if (gameBoard.getRollValue() != 0) {
 			showMoves();
-			diceRollButton.setDisable(true);
-			
+			diceRollButton.setDisable(true);		
 			
 			//set the dice images
 			if(gameBoard.getRollValue() == 4){
@@ -209,11 +229,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				die3.setImage(tetraDice6);
 				die4.setImage(tetraDice1);
 			}
-
-			
-			
-			
-			
 			
 		} else if (gameBoard.getRollValue() == 0) {
 			diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
@@ -227,13 +242,17 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			turnNotification.setText("Sorry!");
 			boardUpdate();
 			processAITurn();
-			//diceRollButton.setDisable(false);
 		}
-		// Disables the roll button so only allowable moves buttons are able to be
-		// clicked
-		// diceRollButton.setDisable(true);
 	}
 
+	/**
+	 * tileHandler takes an ActionEvent and loops through the moves available to the player. Once a value is selected
+	 * from available moves, additional arithmetic is used to calculate if the move is a double move, capture move, or
+	 * a move that would 'bear-off' a piece from the board. This method also handles a win condition for the player and
+	 * calls the appropriate method to change scenes.
+	 * 
+	 * @param event ActionEvent button click that moves the piece the player selects.
+	 */
 	public void tileHandler(ActionEvent event) {
 		Button selected = (Button) event.getSource();
 		// Player's turn if getTurnCounter returns 0
@@ -279,11 +298,13 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			System.out.println("You Win!");
 		}
 		processAITurn();
-		//diceRollButton.setDisable(false);
 	}
 
+	/**
+	 * showMoves will change the opacity to make buttons visible to the player for all available (legal) moves.
+	 * This class also updates the label on the gameboard to display the dice roll.
+	 */
 	public void showMoves() {
-
 		if (gameBoard.getTurnCounter() == 0) {
 			for (Integer allowable : gameBoard.getList()) {
 				if (allowable != null && allowable != -1) {
@@ -301,6 +322,11 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		}
 	}
 
+	/**
+	 * boardUpdate will show newly moved pieces and hide then images in the pieces former position. 
+	 * This method also updates labels to show pieces remaining for player and AI, as well as reset the 
+	 * turn label to "" an empty string in order for the next move to add whether it is player or AI turn.
+	 */
 	public void boardUpdate() {
 		PauseTransition pauseTurnNotificationPlayer = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnNotificationAI = new PauseTransition(Duration.millis(1000));
@@ -328,10 +354,14 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		pauseTurnNotificationPlayer.play();
 		pauseTurnNotificationAI.setOnFinished(event -> turnNotificationAI.setText(""));
 		pauseTurnNotificationAI.play();
-		//diceRollButton.setDisable(false);
-
 	}
 
+	/**
+	 * processAITurn will handle the entirety of the AI turn until the next player turn. Label updates and 
+	 * image updates will occur in this method for AI specific movements. PauseTransitions are used to slow down
+	 * the AI to prevent instantaneous moves (and allow the player to process what the AI has done). This class
+	 * also handles that AI win condition and calls the appropriate method to switch scenes.
+	 */
 	public void processAITurn() {
 		// pause transitions will add a delay to the AI moves for better visibility 
 		PauseTransition pauseBoardUpdate = new PauseTransition(Duration.millis(1000));
@@ -361,19 +391,19 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 				gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() - 1);
 			}
 			gameBoard.getAiBoard()[farthestMove] = 0;
+			// hierarchy of moves
 			if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
 				gameBoard.getAiBoard()[farthestMove+gameBoard.getRollValue()] = 1;
 				turnNotificationAI.setText("Roll Again!");
-				//processAITurn();
 			}
 			else if(farthestMove + gameBoard.getRollValue() == 15) {
 				gameBoard.setAiPiecesCompleted(gameBoard.getAiPiecesCompleted() + 1);
 			}
 			else if(farthestMove + gameBoard.getRollValue() < 15  && farthestMove + gameBoard.getRollValue() != 14 || farthestMove + gameBoard.getRollValue() != 8 || farthestMove + gameBoard.getRollValue() != 4) {
 			gameBoard.getAiBoard()[farthestMove + gameBoard.getRollValue()] = 1;
-			} 
+			} 			
 			
-			
+			// check for a capture on a player piece
 			if (farthestMove + gameBoard.getRollValue() > 4 && farthestMove + gameBoard.getRollValue() < 13) {
 
 				if (gameBoard.getPlayerBoard()[farthestMove + gameBoard.getRollValue()] == 1) {
@@ -381,16 +411,17 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() + 1);
 				}
 			}
-		} else if(gameBoard.getRollValue() == 0) {
+		} 
+		else if(gameBoard.getRollValue() == 0) {
 			turnNotificationAI.setText("Sorry!");
 		}
 		
+		// process another ai turn if they scored a double move
 		if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
 			pauseBoardUpdate.setOnFinished(event -> boardUpdate());
 			pauseBoardUpdate.play();
 			pauseProcessAIAgain.setOnFinished(event -> processAITurn());
-			pauseProcessAIAgain.play();
-			
+			pauseProcessAIAgain.play();		
 		}
 		
 		pauseBoardUpdate.setOnFinished(event -> boardUpdate());
@@ -402,9 +433,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		pauseTurnLabel.play();
 		pauseEnableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
 		pauseEnableRollButton.play();
-		
-		
-		
+				
 		if (gameBoard.getAiPiecesCompleted() == 7) {
 			// disable the roll button to prevent the game from breaking
 			diceRollButton.setDisable(false);
@@ -417,8 +446,11 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		
 	}
 
+	/**
+	 * handle is a default method included when a class implements an EventHandler.
+	 */
 	@Override
-	public void handle(ActionEvent arg0) {
+	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
 
 	}
