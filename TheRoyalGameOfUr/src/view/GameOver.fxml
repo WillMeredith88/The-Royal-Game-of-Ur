@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.controller.GameOverController">
+   <children>
+      <AnchorPane prefHeight="900.0" prefWidth="900.0" style="-fx-background-image: url('application/images/game_bkg.png');">
+         <children>
+            <Label fx:id="lbl_GameOverMessage" alignment="CENTER" layoutX="183.0" layoutY="304.0" prefHeight="195.0" prefWidth="534.0">
+               <font>
+                  <Font name="Centaur" size="96.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_MainMenu" layoutX="343.0" layoutY="729.0" mnemonicParsing="false" onAction="#GoMenu" prefHeight="83.0" prefWidth="214.0" style="-fx-background-color: #e75050;" text="Main Menu" textFill="#fffbfb">
+               <font>
+                  <Font name="Centaur" size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

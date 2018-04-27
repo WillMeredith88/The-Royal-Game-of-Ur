@@ -96,6 +96,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	private HashMap<Integer, ImageView> aiTokenHashmap;
 
 	GameBoard gameBoard;
+	
+	public static int winner = -1;
 
 	/**
 	 * GoMenu will switch the current scene to TitleScreen.fxml
@@ -109,8 +111,20 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// System.out.println("Main Page");
-
+	}
+	
+	/**
+	 * GoMenu will switch the current scene to GameOver.fxml
+	 */
+	@FXML
+	protected void GoGameOver() {
+		try {
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/GameOver.fxml"));
+			Main.stage.setScene(new Scene(root, 900, 900));
+			Main.stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -185,11 +199,6 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		// Cleans the board up to start the game
 		boardUpdate();
 		turnTracker.setText("Player");
-		/*
-		 * if (gameBoard.getAiPiecesCompleted() == 7) { System.out.println("You lose!");
-		 * } else if(gameBoard.getPlayerPiecesCompleted() == 7) {
-		 * System.out.println("You win!"); }
-		 */
 	}
 
 	/**
@@ -297,8 +306,9 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			/**
 			 * TODO: add change to "You Win!" Scene here.
 			 */
-					
-			System.out.println("You Win!");
+			winner = 0;
+			GoGameOver();				
+			//System.out.println("You Win!");
 		}
 		processAITurn();
 	}
@@ -393,21 +403,34 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					}
 				}
 			}
-			if (farthestMove == 0) {
-				gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() - 1);
+			System.out.println(farthestMove);
+			
+			if(gameBoard.getAiPiecesRemaining() != 0 && farthestMove == -1) {
+				turnNotificationAI.setText("Sorry!");
 			}
-			gameBoard.getAiBoard()[farthestMove] = 0;
-			// hierarchy of moves
-			if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
+			else if(gameBoard.getAiPiecesRemaining() == 0 && farthestMove == -1) {
+				turnNotificationAI.setText("Sorry!");
+			}
+			else if(farthestMove + gameBoard.getRollValue() == 14 || farthestMove + gameBoard.getRollValue() == 8 || farthestMove + gameBoard.getRollValue() == 4) {
 				gameBoard.getAiBoard()[farthestMove+gameBoard.getRollValue()] = 1;
+				gameBoard.getAiBoard()[farthestMove] = 0;
 				turnNotificationAI.setText("Roll Again!");
 			}
 			else if(farthestMove + gameBoard.getRollValue() == 15) {
 				gameBoard.setAiPiecesCompleted(gameBoard.getAiPiecesCompleted() + 1);
+				gameBoard.getAiBoard()[farthestMove] = 0;
 			}
 			else if(farthestMove + gameBoard.getRollValue() < 15  && farthestMove + gameBoard.getRollValue() != 14 || farthestMove + gameBoard.getRollValue() != 8 || farthestMove + gameBoard.getRollValue() != 4) {
 			gameBoard.getAiBoard()[farthestMove + gameBoard.getRollValue()] = 1;
-			} 			
+			gameBoard.getAiBoard()[farthestMove] = 0;
+			} 
+			
+			if (farthestMove == 0) {
+				gameBoard.setAiPiecesRemaining(gameBoard.getAiPiecesRemaining() - 1);
+			}	
+			
+			// hierarchy of moves
+						
 			
 			// check for a capture on a player piece
 			if (farthestMove + gameBoard.getRollValue() > 4 && farthestMove + gameBoard.getRollValue() < 13) {
@@ -416,7 +439,9 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					gameBoard.getPlayerBoard()[farthestMove + gameBoard.getRollValue()] = 0;
 					gameBoard.setPlayerPiecesRemaining(gameBoard.getPlayerPiecesRemaining() + 1);
 				}
+				gameBoard.getAiBoard()[farthestMove] = 0;
 			}
+			
 		} 
 		else if(gameBoard.getRollValue() == 0) {
 			turnNotificationAI.setText("Sorry!");
@@ -446,10 +471,19 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			/**
 			 * TODO: add change to "You lose" Scene here
 			 */
-			
-			System.out.println("YOU LOSE");
+			winner = 1;
+			GoGameOver();
+			//System.out.println("YOU LOSE");
 		}
 		
+	}
+	
+	/**
+	 * getWinner will return a boolean int value depending on wether or not the user wins or loses
+	 * @return int value of the win or lose condition
+	 */
+	public static int getWinner() {
+		return winner;
 	}
 
 	/**
