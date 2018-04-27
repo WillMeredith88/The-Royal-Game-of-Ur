@@ -115,7 +115,9 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 
 	/**
 	 * initialize sets up the starting condition of all images and buttons, initializing them into Hashmaps.
-	 * It updates the GameBoard model then starts the player's turn.
+	 * It updates the GameBoard model then starts the player's turn. Key's for each of the hashmaps correspond to
+	 * positions on the board. The 1 key, corresponds to player position 1 on the board and is used to retrieve both
+	 * the button and image at that position.
 	 */
 	@FXML
 	public void initialize() {
@@ -194,6 +196,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	 * diceRoll takes an ActionEvent and processes a random roll of the dice using the Dice and GameBoard model classes.
 	 * Images corresponding to a matching dice roll are also displayed for the player only. The moves from the roll(s) 
 	 * are shown on the board and finally the AI turn is processed.
+	 * 
 	 * @param event ActionEvent button click that processes the dice roll for the player.
 	 */
 	public void diceRoll(ActionEvent event) {
@@ -301,7 +304,8 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * showMoves will change the opacity to make buttons visible to the player for all available (legal) moves.
+	 * showMoves will change the opacity to make buttons visible to the player for all available (legal) moves
+	 * and activates those buttons so the player may click their choice.
 	 * This class also updates the label on the gameboard to display the dice roll.
 	 */
 	public void showMoves() {
@@ -323,9 +327,11 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * boardUpdate will show newly moved pieces and hide then images in the pieces former position. 
+	 * boardUpdate will show newly moved pieces and hide the images in the pieces former position. 
 	 * This method also updates labels to show pieces remaining for player and AI, as well as reset the 
 	 * turn label to "" an empty string in order for the next move to add whether it is player or AI turn.
+	 * All player positions are stored in the AiBoard and the PlayerBoard which are used by this method for
+	 * the update.
 	 */
 	public void boardUpdate() {
 		PauseTransition pauseTurnNotificationPlayer = new PauseTransition(Duration.millis(1000));

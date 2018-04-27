@@ -50,7 +50,7 @@ public class GameBoard {
 	 * or not a piece occupies the space. Special consideration is taken for the '8' rosette square as a player or ai piece
 	 * cannot be captured in that location.
 	 * 
-	 * @return List<Integer> updated list of pieces currently on the board.
+	 * @return List<Integer> updated list of pieces currently on the board that are able to be moved.
 	 */
 	public List<Integer> allowableMoves() {
 		int roll = Dice.rollDice();
