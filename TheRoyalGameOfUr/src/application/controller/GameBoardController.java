@@ -544,7 +544,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * getWinner will return a boolean int value depending on wether or not the user
+	 * getWinner will return a boolean int value depending on whether or not the user
 	 * wins or loses
 	 * 
 	 * @return int value of the win or lose condition
