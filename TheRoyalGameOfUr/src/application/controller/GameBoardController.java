@@ -262,7 +262,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			}
 
 		} else if (gameBoard.getList().isEmpty()) {
-			turnNotification.setText("No possible moves!");
+			turnNotification.setText("Sorry!");
 			if (gameBoard.getRollValue() != 0) {
 				diceRollLabel.setText(Integer.toString(gameBoard.getRollValue()));
 				// set the dice images
@@ -447,13 +447,14 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		PauseTransition pauseTurnCounter = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseProcessAIAgain = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
-		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(1500));
+		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(2000));
 
 		gameBoard.setTurnCounter(1);
 		turnTracker.setText("Computer");
 		diceRollButton.setDisable(true);
 		gameBoard.allowableMoves();
 		diceRollLabelAI.setText(Integer.toString(gameBoard.getRollValue()));
+		int enablePlayerButton = 0;
 		boardUpdate();
 
 		int farthestMove = -1;
@@ -466,7 +467,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 					}
 				}
 			}
-			System.out.println(farthestMove);
+			//System.out.println(farthestMove);
 
 			if (gameBoard.getAiPiecesRemaining() != 0 && farthestMove == -1) {
 				turnNotificationAI.setText("Sorry!");
@@ -514,17 +515,21 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 			pauseProcessAIAgain.setOnFinished(event -> processAITurn());
 			pauseProcessAIAgain.play();
 		}
+		
+		enablePlayerButton = 1;
 
-		pauseBoardUpdate.setOnFinished(event -> boardUpdate());
-		pauseBoardUpdate.play();
-		pauseTurnCounter.setOnFinished(event -> gameBoard.setTurnCounter(0));
-		pauseTurnCounter.play();
-		gameBoard.getList().clear();
-		pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
-		pauseTurnLabel.play();
-		pauseEnableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
-		pauseEnableRollButton.play();
-
+		if(enablePlayerButton == 1) {
+			pauseBoardUpdate.setOnFinished(event -> boardUpdate());
+			pauseBoardUpdate.play();
+			pauseTurnCounter.setOnFinished(event -> gameBoard.setTurnCounter(0));
+			pauseTurnCounter.play();
+			gameBoard.getList().clear();
+			pauseTurnLabel.setOnFinished(event -> turnTracker.setText("Player"));
+			pauseTurnLabel.play();
+			pauseEnableRollButton.setOnFinished(event -> diceRollButton.setDisable(false));
+			pauseEnableRollButton.play();
+		}
+		
 		if (gameBoard.getAiPiecesCompleted() == 7) {
 			// disable the roll button to prevent the game from breaking
 			diceRollButton.setDisable(false);
