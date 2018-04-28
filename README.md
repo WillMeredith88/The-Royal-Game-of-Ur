@@ -6,7 +6,7 @@ Instructions for running the application:
 For detailed instructions on how to clone a repository please use the infromation at the following URL:
 http://www.cs.utsa.edu/~cs3443/git/egit-hints.html.
 
-The URI is: https://github.com/UTSA-CS-3443/The-Royal-Game-of-Ur
+  The URI is: https://github.com/UTSA-CS-3443/The-Royal-Game-of-Ur
 
 2) To run the application, run Main.java.
 
