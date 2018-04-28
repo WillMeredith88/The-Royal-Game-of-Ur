@@ -447,7 +447,7 @@ public class GameBoardController implements EventHandler<ActionEvent> {
 		PauseTransition pauseTurnCounter = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseProcessAIAgain = new PauseTransition(Duration.millis(1000));
 		PauseTransition pauseTurnLabel = new PauseTransition(Duration.millis(1500));
-		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(2000));
+		PauseTransition pauseEnableRollButton = new PauseTransition(Duration.millis(1000));
 
 		gameBoard.setTurnCounter(1);
 		turnTracker.setText("Computer");
